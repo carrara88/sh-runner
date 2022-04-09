@@ -2,9 +2,9 @@
 
 Created for an easy raspberry-pi management, it can be used on any debian/unix (local) system, enjoy!
 
-__Version:__ 0.1 (unstable) \
+__Version:__ 0.1 (unstable|incomplete) \
 __OS:__ Debian/Unix \
-__Require:__ nginx,nodejs
+__Require:__ nginx,nodejs \
 
 ## Info
 ---
