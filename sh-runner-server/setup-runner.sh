@@ -49,7 +49,7 @@ fi
 
 echo "################################################################"
 echo "-> clone: sh-runner"
-sudo rm -rvf /var/www/sh-runner
+sudo rm -rf /var/www/sh-runner
 git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
 
 echo "################################################################"
