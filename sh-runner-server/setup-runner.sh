@@ -29,11 +29,20 @@ if which node > /dev/null
 
 echo "################################################################"
 echo "-> setup: nginx"
-sudo apt install nginx -y
+if which nginx > /dev/null 2>&1 then
+        echo "nginx is installed, skipping..."
+    else
+        sudo apt install nginx -y
+    fi
+
 
 echo "################################################################"
 echo "-> setup: @angular/cli"
-sudo npm install -g @angular/cli -y
+if hash ng 2>/dev/null then
+        echo "@angular/cli is installed, skipping..."
+    else
+        sudo npm install -g @angular/cli -y
+    fi
 
 echo "################################################################"
 echo "-> clone: sh-runner"
