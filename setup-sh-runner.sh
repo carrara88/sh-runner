@@ -3,8 +3,8 @@
 ################################################################
 # Server setup for 'sh-runner'
 # run this script with:
-# $ curl https://raw.githubusercontent.com/carrara88/sh-runner/main/sh-runner-server/setup-sh-runner.sh -o setup-sh-runner.sh
-# $ ./setup-sh-runner.sh
+# $ curl https://raw.githubusercontent.com/carrara88/sh-runner/main/setup-sh-runner.sh -o setup-sh-runner.sh
+# $ sudo chmod 755 setup-sh-runner.sh
 ################################################################
 
 
@@ -18,7 +18,7 @@ if command -v node &> /dev/null
 then
     echo "node is installed, skipping..."
 else
-    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+    sudo curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     sudo apt-get install nodejs -y
 fi
 
@@ -38,15 +38,15 @@ echo "-> clone: sh-runner repo"
 sudo rm -rf /var/www/sh-runner
 if [[ "$1" -eq "dev" ]]; then  # force installation remove previous installer status file
     echo "-> clone dev branch"
-    git clone --branch dev https://github.com/carrara88/sh-runner.git /var/www/sh-runner
+    sudo git clone --branch dev https://github.com/carrara88/sh-runner.git /var/www/sh-runner
 else
-    git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
+    sudo git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
 fi
 
 echo "################################################################"
 echo "-> move:  /var/www/sh-runner/sh-runner-app/. -> /var/www/html/runner/ "
-rm -rf /var/www/html/runner
-mkdir /var/www/html/runner
+sudo rm -rf /var/www/html/runner
+sudo mkdir /var/www/html/runner
 sudo cp -a /var/www/sh-runner/sh-runner-app /var/www/html/runner/
 echo "################################################################"
 echo "-> Setup completed!"
