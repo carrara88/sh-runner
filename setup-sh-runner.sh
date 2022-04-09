@@ -21,7 +21,7 @@ else
     sudo curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     sudo apt-get install nodejs -y
 fi
-    sudo bash -c 'cat << EOF > /etc/systemd/system/node_sh_runner.service
+    sudo bash -c "cat << EOF > /etc/systemd/system/node_sh_runner.service
 [Unit]
 Description=sh-runner nodejs service
 After=network.target
@@ -35,7 +35,7 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
-EOF'
+EOF"
 
     sudo systemctl daemon-reload
     sudo systemctl start node_sh_runner
