@@ -37,15 +37,17 @@ echo "################################################################"
 echo "-> clone: sh-runner repo"
 sudo rm -rf /var/www/sh-runner
 if [[ "$1" -eq "dev" ]]; then  # force installation remove previous installer status file
+    echo "-> clone dev branch"
     git clone --branch dev https://github.com/carrara88/sh-runner.git /var/www/sh-runner
 else
     git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
 fi
 
 echo "################################################################"
-echo "-> move: /var/www/sh-runner/sh-runner-app"
-cd /var/www/sh-runner/sh-runner-app
-
+echo "-> move:  /var/www/sh-runner/sh-runner-app/. -> /var/www/html/runner/ "
+rm -rf /var/www/html/runner
+mkdir /var/www/html/runner
+sudo cp -a /var/www/sh-runner/sh-runner-app /var/www/html/runner/
 echo "################################################################"
 echo "-> Setup completed!"
 
