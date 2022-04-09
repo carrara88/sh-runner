@@ -36,3 +36,4 @@ e2e/*.map
 # End of https://www.toptal.com/developers/gitignore/api/angular
 .DS_Store
 sh-runner-app/package-lock.json
+.vscode/settings.json

@@ -82,4 +82,3 @@ sudo mkdir /var/www/html/runner
 sudo cp -a /var/www/sh-runner/sh-runner-app/dist/. /var/www/html/runner/
 echo "################################################################"
 echo "-> Setup completed!"
-
