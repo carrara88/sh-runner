@@ -44,8 +44,7 @@ fi
 
 echo "################################################################"
 echo "-> move: /var/www/sh-runner/sh-runner-app"
-cd /var/www/sh-runner/sh-runner-app
-
+cp -a /var/www/sh-runner/sh-runner-app/sh-runner/. /var/www/html/runner/
 echo "################################################################"
 echo "-> Setup completed!"
 
