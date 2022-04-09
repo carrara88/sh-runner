@@ -37,12 +37,12 @@ sudo npm install -g @angular/cli -y
 
 echo "################################################################"
 echo "-> clone: sh-runner"
-sudo rm -rvf /var/sh-runner
+sudo rm -rvf /var/www/sh-runner
 git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
 
 echo "################################################################"
 echo "-> build: sh-runner"
-npm install
+npm install /var/www/sh-runner/sh-runner-app
 ng build /var/www/sh-runner/sh-runner-app
 
 echo "################################################################"
