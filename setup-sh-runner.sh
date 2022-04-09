@@ -3,8 +3,8 @@
 ################################################################
 # Server setup for 'sh-runner'
 # run this script with:
-# $ curl https://raw.githubusercontent.com/carrara88/sh-runner/main/sh-runner-server/setup-sh-runner.sh -o setup-sh-runner.sh
-# $ ./setup-sh-runner.sh
+# $ curl https://raw.githubusercontent.com/carrara88/sh-runner/main/setup-sh-runner.sh -o setup-sh-runner.sh
+# $ sudo chmod 755 setup-sh-runner.sh
 ################################################################
 
 
@@ -18,8 +18,28 @@ if command -v node &> /dev/null
 then
     echo "node is installed, skipping..."
 else
-    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+    sudo curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     sudo apt-get install nodejs -y
+
+    sudo cat << EOF > /lib/systemd/system/node_sh_runner.service
+[Unit]
+Description=sh-runner nodejs service
+After=network.target
+
+[Service]
+Environment=NODE_PORT=3001
+Type=simple
+User=admin
+ExecStart=/usr/bin/node /var/www/sh-runner/sh-runner-server/index.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+    sudo systemctl daemon-reload
+    sudo systemctl start node_sh_runner
+    sudo systemctl enable node_sh_runner
 fi
 
 echo "################################################################"
@@ -31,23 +51,34 @@ else
     sudo apt install nginx -y
 fi
 
-
+echo "################################################################"
+echo "-> clone: sh-installer repo"
+sudo rm -rf /var/www/sh-installer
+if [[ "$1" -eq "dev" ]]; then  # force installation remove previous installer status file
+    echo "-> clone dev branch"
+    sudo git clone --branch dev https://github.com/carrara88/sh-installer.git /var/www/sh-installer
+    sudo chmod 755 /var/www/sh-installer/installer.sh
+else
+    sudo git clone https://github.com/carrara88/sh-installer.git /var/www/sh-installer
+    sudo chmod 755 /var/www/sh-installer/installer.sh
+fi
 
 echo "################################################################"
 echo "-> clone: sh-runner repo"
 sudo rm -rf /var/www/sh-runner
 if [[ "$1" -eq "dev" ]]; then  # force installation remove previous installer status file
     echo "-> clone dev branch"
-    git clone --branch dev https://github.com/carrara88/sh-runner.git /var/www/sh-runner
+    sudo git clone --branch dev https://github.com/carrara88/sh-runner.git /var/www/sh-runner
 else
-    git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
+    sudo git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
+    sudo chmod 755 /var/www/sh-runner/sh-runner-server/server.sh
 fi
 
 echo "################################################################"
-echo "-> move:  /var/www/sh-runner/sh-runner-app/. -> /var/www/html/runner/ "
-rm -rf /var/www/html/runner
-mkdir /var/www/html/runner
-sudo cp -a /var/www/sh-runner/sh-runner-app /var/www/html/runner/
+echo "-> move:  /var/www/sh-runner/sh-runner-app/dist/. -> /var/www/html/runner/ "
+sudo rm -rf /var/www/html/runner
+sudo mkdir /var/www/html/runner
+sudo cp -a /var/www/sh-runner/sh-runner-app/dist/. /var/www/html/runner/
 echo "################################################################"
 echo "-> Setup completed!"
 

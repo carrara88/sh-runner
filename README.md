@@ -35,7 +35,7 @@ Also, you can follow __[Manual Setup]__ steps and integrate SH-Runner into exist
 Open you terminal and follow this setup steps:
 
 ```
-    $ curl https://raw.githubusercontent.com/carrara88/sh-runner/setup-sh-runner.sh -o setup-sh-runner.sh
+    $ curl https://raw.githubusercontent.com/carrara88/sh-runner/main/setup-sh-runner.sh -o setup-sh-runner.sh
     $ sudo chmod 755 setup-sh-runner.sh
     $ ./setup-sh-runner.sh
 ```
