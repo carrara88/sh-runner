@@ -16,8 +16,14 @@ sudo apt-get install npm -y
 
 echo "################################################################"
 echo "-> setup: nodejs"
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo apt-get install nodejs -y
+if which node > /dev/null
+    then
+        echo "node is installed, skipping..."
+    else
+        curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+        sudo apt-get install nodejs -y
+    fi
+
 
 
 
