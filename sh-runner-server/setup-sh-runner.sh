@@ -3,8 +3,8 @@
 ################################################################
 # Server setup for 'sh-runner'
 # run this script with:
-# $ curl https://raw.githubusercontent.com/carrara88/sh-runner/main/sh-runner-server/setup-runner.sh -o setup-runner.sh
-# $ ./setup-runner.sh
+# $ curl https://raw.githubusercontent.com/carrara88/sh-runner/main/sh-runner-server/setup-sh-runner.sh -o setup-sh-runner.sh
+# $ ./setup-sh-runner.sh
 ################################################################
 
 
@@ -32,13 +32,18 @@ else
 fi
 
 
-echo "################################################################"
-echo "-> clone: sh-runner"
-sudo rm -rf /var/www/sh-runner
-git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
 
 echo "################################################################"
-echo "-> build: sh-runner"
+echo "-> clone: sh-runner repo"
+sudo rm -rf /var/www/sh-runner
+if [[ "$1" -eq "dev" ]]; then  # force installation remove previous installer status file
+    git clone --branch dev https://github.com/carrara88/sh-runner.git /var/www/sh-runner
+else
+    git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
+fi
+
+echo "################################################################"
+echo "-> move: /var/www/sh-runner/sh-runner-app"
 cd /var/www/sh-runner/sh-runner-app
 
 echo "################################################################"
