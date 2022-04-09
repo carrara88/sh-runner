@@ -20,6 +20,25 @@ then
 else
     sudo curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     sudo apt-get install nodejs -y
+
+    sudo cat << EOF > /lib/systemd/system/node_sh_runner.service
+[Unit]
+Description=sh-runner nodejs service
+After=network.target
+
+[Service]
+Environment=NODE_PORT=3001
+Type=simple
+User=admin
+ExecStart=/usr/bin/node /var/www/sh-runner/sh-runner-server/index.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+    sudo systemtl start node_sh_runner
+    sudo systemtl enable node_sh_runner
 fi
 
 echo "################################################################"
@@ -31,7 +50,17 @@ else
     sudo apt install nginx -y
 fi
 
-
+echo "################################################################"
+echo "-> clone: sh-installer repo"
+sudo rm -rf /var/www/sh-installer
+if [[ "$1" -eq "dev" ]]; then  # force installation remove previous installer status file
+    echo "-> clone dev branch"
+    sudo git clone --branch dev https://github.com/carrara88/sh-installer.git /var/www/sh-installer
+    sudo chmod 755 /var/www/sh-installer/installer.sh
+else
+    sudo git clone https://github.com/carrara88/sh-installer.git /var/www/sh-installer
+    sudo chmod 755 /var/www/sh-installer/installer.sh
+fi
 
 echo "################################################################"
 echo "-> clone: sh-runner repo"
@@ -41,6 +70,7 @@ if [[ "$1" -eq "dev" ]]; then  # force installation remove previous installer st
     sudo git clone --branch dev https://github.com/carrara88/sh-runner.git /var/www/sh-runner
 else
     sudo git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
+    sudo chmod 755 /var/www/sh-runner/sh-runner-server/server.sh
 fi
 
 echo "################################################################"

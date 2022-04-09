@@ -1,6 +1,6 @@
 const express = require('express'); //Import the express dependency
-const app = express();              //Instantiate an express app, the main work horse of this server
-const port = 5000;                  //Save the port number where your server will be listening
+const app = express(); //Instantiate an express app, the main work horse of this server
+const port = process.env.NODE_PORT ||  3002; //Save the port number where your server will be listening
 const { exec } = require("child_process");
 
 
