@@ -30,7 +30,8 @@ After=network.target
 Environment=NODE_PORT=3001
 Type=simple
 User=admin
-ExecStart=/usr/bin/node /var/www/sh-runner/sh-runner-server/index.js
+WorkingDirectory=/var/www/sh-runner/sh-runner-server/
+ExecStart=/usr/bin/node index.js
 Restart=on-failure
 
 [Install]
