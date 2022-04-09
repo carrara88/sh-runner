@@ -28,7 +28,7 @@ if which node > /dev/null then
 
 echo "################################################################"
 echo "-> setup: nginx"
-if type nginx > /dev/null 2>&1 then
+if which nginx > /dev/null then
         echo "nginx is installed, skipping..."
     else
         sudo apt install nginx -y
@@ -37,7 +37,7 @@ if type nginx > /dev/null 2>&1 then
 
 echo "################################################################"
 echo "-> setup: @angular/cli"
-if hash ng 2>/dev/null then
+if which ng > /dev/null then
         echo "@angular/cli is installed, skipping..."
     else
         sudo npm install -g @angular/cli -y
