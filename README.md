@@ -7,13 +7,13 @@ __OS:__ Debian/Unix \
 __Require:__ nginx,nodejs \
 
 ## Info
----
+
 SH-Runner enable an easy way to run custom bash scripts into unix systems. \
 Run bash scripts "as an API" over http protocol with Nginx and integrated Node.js server. 
 SH-Runner also include an Angular UI able to create and run custom bash scripts from browser.
 
 ## Parts
----
+
 SH-Runner is composed by two parts, sh-runner-app (frontend) and sh-runner-server (backend). \
 
 
@@ -26,12 +26,12 @@ __sh-runner-server__ is an nodejs/express _backend server_ performing local scri
 
 
 ## Quick Setup vs Manual Setup
----
+
 If you want to __[Quick Setup]__ SH-Runner into you system, use script below and install all dependencies and files.
 Also, you can follow __[Manual Setup]__ steps and integrate SH-Runner into existing system.
 
 ### Quick Setup
----
+
 Open you terminal and follow this setup steps:
 
 ```
@@ -45,7 +45,7 @@ All it's almost done! 👍 Just visit `http://[system-ip]/runner` and follow the
 
 
 ### Manual Setup
----
+
 If you want to setup SH-Runner manually, follow the steps below.
 
 #### 1) Setup Nginx (skip if nginx is already installed)
