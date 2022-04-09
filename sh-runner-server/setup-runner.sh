@@ -16,8 +16,7 @@ sudo apt-get install npm -y
 
 echo "################################################################"
 echo "-> setup: nodejs"
-if which node > /dev/null
-    then
+if which node > /dev/null then
         echo "node is installed, skipping..."
     else
         curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
@@ -29,7 +28,7 @@ if which node > /dev/null
 
 echo "################################################################"
 echo "-> setup: nginx"
-if which nginx > /dev/null 2>&1 then
+if type nginx > /dev/null 2>&1 then
         echo "nginx is installed, skipping..."
     else
         sudo apt install nginx -y
