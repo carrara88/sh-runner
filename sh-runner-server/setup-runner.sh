@@ -16,29 +16,32 @@ sudo apt-get install npm -y
 
 echo "################################################################"
 echo "-> setup: nodejs"
-if which node > /dev/null then
-        echo "node is installed, skipping..."
-    else
-        curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-        sudo apt-get install nodejs -y
-    fi
+if which node >/dev/null then
+    echo "node is installed, skipping..."
+else
+    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+    sudo apt-get install nodejs -y
+fi
 
 
 
 
 echo "################################################################"
 echo "-> setup: nginx"
-
-        sudo apt install nginx -y
+if which nginx >/dev/null then
+    echo "nginx is installed, skipping..."
+else
+    sudo apt install nginx -y
+fi
 
 
 echo "################################################################"
 echo "-> setup: @angular/cli"
-if which ng > /dev/null then
-        echo "@angular/cli is installed, skipping..."
-    else
-        sudo npm install -g @angular/cli -y
-    fi
+if which ng >/dev/null then
+    echo "@angular/cli is installed, skipping..."
+else
+    sudo npm install -g @angular/cli -y
+fi
 
 echo "################################################################"
 echo "-> clone: sh-runner"
