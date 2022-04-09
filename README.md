@@ -34,7 +34,7 @@ Open you terminal and follow this setup steps:
 ```
 
 #### Hello Word!
-All it's almost done! Just visit `http://[your-ip]/runner` and follow the wizard!
+All it's almost done! 👍 Just visit `http://[your-ip]/runner` and follow the wizard!
 
 
 ### Manual Setup
@@ -57,12 +57,4 @@ If you want to setup SH-Runner manually, follow the steps below.
 [...] missing doc. (see step on `setup-sh-runner.sh`)
 
 #### 6) Hello Word!
-All it's almost done! Just visit `http://[your-ip]/runner` and follow the wizard!
-
-
-
-```
-    $ curl https://raw.githubusercontent.com/carrara88/sh-runner/main/setup-sh-runner.sh -o setup-sh-runner.sh
-    $ sudo chmod 755 setup-sh-runner.sh
-    $ ./setup-sh-runner.sh
-```
+All it's almost done! 👍 Just visit `http://[your-ip]/runner` and follow the wizard!
