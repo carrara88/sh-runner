@@ -3,15 +3,13 @@
 ################################################################
 # Server setup for 'sh-runner'
 # run this script with:
-# $ curl https://raw.githubusercontent.com/carrara88/sh-runner/main/sh-runner-server/setup-runner.sh -o setup-runner.sh
-# $ ./setup-runner.sh
+# $ curl https://raw.githubusercontent.com/carrara88/sh-runner/main/sh-runner-server/setup-sh-runner.sh -o setup-sh-runner.sh
+# $ ./setup-sh-runner.sh
 ################################################################
-echo "################################################################"
-echo "-> sh-runner (Node.js + npm + nginx + @angular/cli)"
+
 
 echo "################################################################"
-echo "echo -> setup: npm"
-sudo apt-get install npm -y
+echo "-> setup for sh-runner (extra-setup: Node.js + nginx)"
 
 
 echo "################################################################"
@@ -24,9 +22,6 @@ else
     sudo apt-get install nodejs -y
 fi
 
-
-
-
 echo "################################################################"
 echo "-> setup: nginx"
 if command -v nginx &> /dev/null 
@@ -37,26 +32,19 @@ else
 fi
 
 
+
 echo "################################################################"
-echo "-> setup: @angular/cli"
-if command -v ng &> /dev/null
-then
-    echo "@angular/cli is installed, skipping..."
+echo "-> clone: sh-runner repo"
+sudo rm -rf /var/www/sh-runner
+if [[ "$1" -eq "dev" ]]; then  # force installation remove previous installer status file
+    git clone --branch dev https://github.com/carrara88/sh-runner.git /var/www/sh-runner
 else
-    sudo npm install -g @angular/cli -y
+    git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
 fi
 
-
 echo "################################################################"
-echo "-> clone: sh-runner"
-sudo rm -rvf /var/www/sh-runner
-git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
-
-echo "################################################################"
-echo "-> build: sh-runner"
+echo "-> move: /var/www/sh-runner/sh-runner-app"
 cd /var/www/sh-runner/sh-runner-app
-npm install
-ng build
 
 echo "################################################################"
 echo "-> Setup completed!"
