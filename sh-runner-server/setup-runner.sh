@@ -36,6 +36,7 @@ git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
 
 echo "################################################################"
 echo "-> build: sh-runner"
+npm install
 ng build /var/www/sh-runner/sh-runner-app
 
 echo "################################################################"
