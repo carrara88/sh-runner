@@ -45,6 +45,7 @@ fi
 
 echo "################################################################"
 echo "-> move: /var/www/sh-runner/sh-runner-app"
+sudo rm -rf /var/www/html/runner/
 sudo mkdir /var/www/html/runner/
 cp -a /var/www/sh-runner/sh-runner-app/. /var/www/html/runner/
 echo "################################################################"
