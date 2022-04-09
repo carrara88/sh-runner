@@ -103,8 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
+.angular
+
 # System files
 .DS_Store
 Thumbs.db
-sh-runner-app/src/environments/environment.prod.ts
 sh-runner-app/package-lock.json
