@@ -16,7 +16,7 @@ sudo apt-get install npm -y
 
 echo "################################################################"
 echo "-> setup: nodejs"
-if which node >/dev/null 
+if command -v node &> /dev/null
 then
     echo "node is installed, skipping..."
 else
@@ -29,7 +29,7 @@ fi
 
 echo "################################################################"
 echo "-> setup: nginx"
-if which nginx >/dev/null 
+if command -v nginx &> /dev/null 
 then
     echo "nginx is installed, skipping..."
 else
@@ -39,7 +39,7 @@ fi
 
 echo "################################################################"
 echo "-> setup: @angular/cli"
-if which ng >/dev/null 
+if command -v ng &> /dev/null
 then
     echo "@angular/cli is installed, skipping..."
 else
