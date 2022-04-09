@@ -1,27 +1,34 @@
 # SH-Runner | an easy bash runner
 
-__Info:__ SH-Runner enable an easy way to run custom bash scripts into unix systems. \
-__Version:__ 0.1 (dev in progress...) \
+Created for an easy raspberry-pi management, it can be used on any debian/unix (local) system, enjoy!
+
+__Version:__ 0.1 (unstable|incomplete) \
 __OS:__ Debian/Unix \
-__Require:__ nginx,nodejs
+__Require:__ nginx,nodejs \
 
-## Elements
-SH-Runner is composed by two elements: APP (frontend) and SERVER (backend). \
-__APP-Element__ is an angular _frontend UI_ managing users input/output. \
-__SERVER-Element__ is an nodejs/express _backend server_ performing local script execution and system tasks \
+## Info
 
-### APP-Element
-[...] missing doc.
+SH-Runner enable an easy way to run custom bash scripts into unix systems. \
+Run bash scripts "as an API" over http protocol with Nginx and integrated Node.js server. 
+SH-Runner also include an Angular UI able to create and run custom bash scripts from browser.
 
-### SERVER-Element
-[...] missing doc.
+## Parts
 
----
+SH-Runner is composed by two parts, sh-runner-app (frontend) and sh-runner-server (backend). \
+
+
+### sh-runner-app
+__sh-runner-app__ is an angular _frontend UI_ managing users input/output. \
+
+### sh-runner-server
+__sh-runner-server__ is an nodejs/express _backend server_ performing local script execution and system tasks \
+
+
 
 ## Quick Setup vs Manual Setup
 
 If you want to __[Quick Setup]__ SH-Runner into you system, use script below and install all dependencies and files.
-Also, you can follow __[Manual Setup]__ steps and integrate SH-Runner into your existing system.
+Also, you can follow __[Manual Setup]__ steps and integrate SH-Runner into existing system.
 
 ### Quick Setup
 
@@ -34,7 +41,7 @@ Open you terminal and follow this setup steps:
 ```
 
 #### Hello Word!
-All it's almost done! 👍 Just visit `http://[your-ip]/runner` and follow the wizard!
+All it's almost done! 👍 Just visit `http://[system-ip]/runner` and follow the wizard!
 
 
 ### Manual Setup
@@ -57,4 +64,4 @@ If you want to setup SH-Runner manually, follow the steps below.
 [...] missing doc. (see step on `setup-sh-runner.sh`)
 
 #### 6) Hello Word!
-All it's almost done! 👍 Just visit `http://[your-ip]/runner` and follow the wizard!
+All it's almost done! 👍 Just visit `http://[system-ip]/runner` and follow the wizard!
