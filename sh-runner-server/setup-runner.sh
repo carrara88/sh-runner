@@ -51,8 +51,9 @@ git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
 
 echo "################################################################"
 echo "-> build: sh-runner"
-npm install /var/www/sh-runner/sh-runner-app
-ng build /var/www/sh-runner/sh-runner-app
+cd /var/www/sh-runner/sh-runner-app
+npm install
+ng build
 
 echo "################################################################"
 echo "-> Setup completed!"
