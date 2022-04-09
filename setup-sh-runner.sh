@@ -39,7 +39,7 @@ Restart=on-failure
 WantedBy=multi-user.target
 EOF"
 
-    sudo systemctl daemon-reload
+    sudo systemctl daemon-reload # reload daemons
     sudo systemctl start node_sh_runner
     sudo systemctl enable node_sh_runner
 
