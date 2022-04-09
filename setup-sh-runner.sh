@@ -72,6 +72,7 @@ if [[ "$1" -eq "dev" ]]; then  # force installation remove previous installer st
 else
     sudo git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
     sudo chmod 755 /var/www/sh-runner/sh-runner-server/server.sh
+    sudo npm install /var/www/sh-runner/sh-runner-server
 fi
 
 echo "################################################################"
