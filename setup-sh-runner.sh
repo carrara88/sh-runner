@@ -20,8 +20,8 @@ then
 else
     sudo curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     sudo apt-get install nodejs -y
-
-    sudo cat << EOF > /lib/systemd/system/node_sh_runner.service
+fi
+    sudo cat << EOF > /etc/systemd/system/node_sh_runner.service
 [Unit]
 Description=sh-runner nodejs service
 After=network.target
@@ -40,7 +40,6 @@ EOF
     sudo systemctl daemon-reload
     sudo systemctl start node_sh_runner
     sudo systemctl enable node_sh_runner
-fi
 
 echo "################################################################"
 echo "-> setup: nginx"
