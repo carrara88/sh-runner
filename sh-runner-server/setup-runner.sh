@@ -28,11 +28,8 @@ if which node > /dev/null then
 
 echo "################################################################"
 echo "-> setup: nginx"
-if which nginx > /dev/null then
-        echo "nginx is installed, skipping..."
-    else
+
         sudo apt install nginx -y
-    fi
 
 
 echo "################################################################"
