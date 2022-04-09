@@ -2,14 +2,15 @@
 
 ################################################################
 # Server setup for 'sh-runner'
-# run this script with:
-# $ curl https://raw.githubusercontent.com/carrara88/sh-runner/main/setup-sh-runner.sh -o setup-sh-runner.sh
-# $ sudo chmod 755 setup-sh-runner.sh
+# load this script with:
+# 
+# curl https://raw.githubusercontent.com/carrara88/sh-runner/main/setup-sh-runner.sh -o setup-sh-runner.sh
+# sudo chmod 755 setup-sh-runner.sh
 ################################################################
 
 
 echo "################################################################"
-echo "-> setup for sh-runner (extra-setup: Node.js + nginx)"
+echo "-> Setup for sh-runner (extra-setup: Node.js + nginx)"
 
 
 echo "################################################################"
@@ -21,6 +22,9 @@ else
     sudo curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     sudo apt-get install nodejs -y
 fi
+
+echo "################################################################"
+echo "-> setup: node sh-runner-server as a system service"
 
     sudo bash -c "cat << EOF > /etc/systemd/system/node_sh_runner.service
 [Unit]

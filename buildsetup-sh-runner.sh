@@ -2,9 +2,10 @@
 
 ################################################################
 # Server buildsetup for 'sh-runner'
-# run this script with:
-# $ curl https://raw.githubusercontent.com/carrara88/sh-runner/main/sh-runner-server/buildsetup-runner.sh -o buildsetup-sh-runner.sh
-# $ ./buildsetup-sh-runner.sh
+# load this script with:
+# 
+# curl https://raw.githubusercontent.com/carrara88/sh-runner/main/sh-runner-server/buildsetup-runner.sh -o buildsetup-sh-runner.sh
+# ./buildsetup-sh-runner.sh
 ################################################################
 
 echo "################################################################"
