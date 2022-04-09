@@ -44,10 +44,10 @@ else
 fi
 
 echo "################################################################"
-echo "-> move:  /var/www/sh-runner/sh-runner-app/. -> /var/www/html/runner/ "
+echo "-> move:  /var/www/sh-runner/sh-runner-app/dist/. -> /var/www/html/runner/ "
 sudo rm -rf /var/www/html/runner
 sudo mkdir /var/www/html/runner
-sudo cp -a /var/www/sh-runner/sh-runner-app /var/www/html/runner/
+sudo cp -a /var/www/sh-runner/sh-runner-app/dist/. /var/www/html/runner/
 echo "################################################################"
 echo "-> Setup completed!"
 
