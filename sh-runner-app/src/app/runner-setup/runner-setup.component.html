@@ -1,0 +1,236 @@
+<div class="main-container">
+    <div class="alert alert-app-level alert-info">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="info-circle"></clr-icon>
+          </div>
+          <div class="alert-text">
+            <small>IP:</small> xxx.xxx.xxx.xxx | <small>STATUS:</small> offline
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-container">
+        <div class="content-area">
+            <h1>Wizard Setup</h1>
+            <p>
+                Setup required, please follow steps below to complete system setup.
+            </p>
+            <div class="clr-form-control">
+                <form clrStepper [formGroup]="form" class="clr-form clr-form-horizontal" (ngSubmit)="submit()">
+
+                    <clr-stepper-panel formGroupName="repositories">
+                        <clr-step-title>Repositories</clr-step-title>
+                        <clr-step-description>
+                            <clr-icon shape="folder"></clr-icon>
+                        </clr-step-description>
+                        <clr-step-content *clrIfExpanded>
+                            <div>
+                                <h5>sh-installer.git <small>repository</small></h5>
+                                This repository contain 'sh-installer' library used to execute scripts. 
+                            </div>
+                            <clr-input-container>
+                                <label>sh-installer.git</label>
+                                <input clrInput formControlName="sh_installer_git" />
+                                <clr-control-helper>default: https://github.com/carrara88/sh-installer.git</clr-control-helper>
+                                <clr-control-error *clrIfError="'required'">[Installer Git] Required</clr-control-error>
+                            </clr-input-container>
+                            <div>
+                                <h5>sh-installer-scripts.git <small>Repository:</small></h5>
+                                This repository contain '.sh' scripts executed by 'sh-installer'. 
+                            </div>
+                            <clr-input-container>
+                                <label>sh-installer-scripts.git</label>
+                                <input clrInput formControlName="sh_installer_scripts_git" />
+                                <clr-control-helper>default: https://github.com/carrara88/sh-installer-scripts.git</clr-control-helper>
+                                <clr-control-error *clrIfError="'required'">[Installer Git] Required</clr-control-error>
+                            </clr-input-container>
+                            <button clrStepButton="next">Check repositories</button>
+                        </clr-step-content>
+                    </clr-stepper-panel>
+
+
+                    <clr-stepper-panel formGroupName="instance">
+                    <clr-step-title>
+                        Instance<br>
+                        <small>({{this.form.controls['instance'].value.instance_name}})</small>
+                    </clr-step-title>
+                    <clr-step-description>
+                        <clr-icon [attr.shape]="(this.form.controls['instance'].value.instance_location=='local')?'network-settings':'network-globe'"></clr-icon>
+                        {{this.form.controls['instance'].value.instance_location}}
+                        <clr-icon [attr.shape]="(this.form.controls['instance'].value.instance_mode=='server')?'cluster':'host'"></clr-icon>
+                        {{this.form.controls['instance'].value.instance_mode}} 
+                        
+                    </clr-step-description>
+
+                    
+
+                        <clr-step-content *clrIfExpanded>
+
+                            <div class="clr-form-control">
+                                <div class="clr-control-label">Instance Location:</div>
+                                <div class="btn-group">
+                                    <div class="radio btn btn-sm">
+                                        <input type="radio" formControlName="instance_location" value="local" id="location-local" />
+                                        <label for="location-local">local</label>
+                                    </div>
+                                    <div class="radio btn btn-sm">
+                                        <input type="radio" formControlName="instance_location" value="remote" id="location-remote" />
+                                        <label for="location-remote">remote</label>
+                                    </div>
+                                </div>
+                            </div>  
+
+                            <div class="clr-form-control">
+                                <div class="clr-control-label">Setup this instance as:</div>
+                                <div class="btn-group">
+                                    <div class="radio btn btn-sm">
+                                        <input type="radio" formControlName="instance_mode" value="server" id="mode-server" />
+                                        <label for="mode-server">Server</label>
+                                    </div>
+                                    <div class="radio btn btn-sm">
+                                        <input type="radio" formControlName="instance_mode" value="client" id="mode-client" />
+                                        <label for="mode-client">Client</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        
+                            <button clrStepButton="next">next step</button>
+                        </clr-step-content>
+                    
+                    </clr-stepper-panel>
+                
+                    <clr-stepper-panel formGroupName="server" *ngIf="this.form.controls['instance'].value.instance_mode=='server'">
+                        <clr-step-title>Server</clr-step-title>
+                        <clr-step-description>
+                            <clr-icon shape="cluster"></clr-icon>
+                            {{this.form.controls['client'].value.server_address}}
+                        </clr-step-description>
+                        <clr-step-content *clrIfExpanded>
+                            <div>Server setup require working credentials, please fill the form below to create new server.</div>
+                            <clr-input-container>
+                                <label>Server Name:</label>
+                                <input clrInput formControlName="server_name" />
+                                <clr-control-helper>Server identification name</clr-control-helper>
+                                <clr-control-error *clrIfError="'required'">[Server Name] Required</clr-control-error>
+                            </clr-input-container>
+                        </clr-step-content>
+                    </clr-stepper-panel>
+
+                    <clr-stepper-panel formGroupName="client" *ngIf="this.form.controls['instance'].value.instance_mode=='client'">
+                        <clr-step-title>Client</clr-step-title>
+                        <clr-step-description>
+                            <clr-icon shape="host"></clr-icon>
+                            {{this.form.controls['client'].value.server_address}}
+                        </clr-step-description>
+                        <clr-step-content *clrIfExpanded>
+
+                            <clr-input-container>
+                                <label>Client Name:</label>
+                                <input clrInput formControlName="client_name" />
+                                <clr-control-helper>Client identification name</clr-control-helper>
+                                <clr-control-error *clrIfError="'required'">[Client Name] Required</clr-control-error>
+                            </clr-input-container>
+
+                            <p>Client setup require a running server instance and working credentials, please fill the form below to connect.</p>
+
+                            <clr-input-container>
+                                <label>Server Address:</label>
+                                <input clrInput formControlName="server_address" />
+                                <clr-control-helper>example: http://localhost:5060 </clr-control-helper>
+                                <clr-control-error *clrIfError="'required'">[Server Address] Required</clr-control-error>
+                            </clr-input-container>
+
+                            <clr-input-container>
+                                <label>Server Username:</label>
+                                <input clrInput formControlName="server_username" />
+                                <clr-control-helper>example: root</clr-control-helper>
+                                <clr-control-error *clrIfError="'required'">[Server Username] Required</clr-control-error>
+                            </clr-input-container>
+
+                            <clr-input-container>
+                                <label>Server Password:</label>
+                                <input clrInput formControlName="server_password" />
+                                <clr-control-helper></clr-control-helper>
+                                <clr-control-error *clrIfError="'required'">[Server Password] Required</clr-control-error>
+                            </clr-input-container>
+
+
+                            
+
+                            <button clrStepButton="next">next step</button>
+
+                        </clr-step-content>
+
+
+                    </clr-stepper-panel>
+
+
+                    
+                    <clr-stepper-panel formGroupName="settings"  *ngIf="this.form.controls['instance'].value.instance_mode=='client'">
+                        <clr-step-title>Continuous Integration</clr-step-title>
+                        <clr-step-description>
+                            <clr-icon shape="ci-cd"></clr-icon>
+                        </clr-step-description>
+                        <clr-step-content *clrIfExpanded>
+                            ...jkjhkjkjkjkkkj
+                            <button clrStepButton="next">next step</button>
+                        </clr-step-content>
+                    </clr-stepper-panel>
+
+                        
+                    <clr-stepper-panel formGroupName="settings" *ngIf="this.form.controls['instance'].value.instance_mode=='server'">
+                        <clr-step-title>Layers</clr-step-title>
+                        <clr-step-description>
+                            <clr-icon shape="layers"></clr-icon>
+                        </clr-step-description>
+                        <clr-step-content *clrIfExpanded>
+                            ...
+                            <button clrStepButton="next">next step</button>
+                        </clr-step-content>
+                    </clr-stepper-panel>
+
+                        
+                    <clr-stepper-panel formGroupName="settings" *ngIf="this.form.controls['instance'].value.instance_mode=='server'">
+                        <clr-step-title>Modules</clr-step-title>
+                        <clr-step-description>
+                            <clr-icon shape="block"></clr-icon>
+                        </clr-step-description>
+                        <clr-step-content *clrIfExpanded>
+                            ...
+                            <button clrStepButton="next">next</button>
+                        </clr-step-content>
+                    </clr-stepper-panel>
+
+                    <clr-stepper-panel formGroupName="settings"  *ngIf="this.form.controls['instance'].value.instance_mode=='client'">
+                        <clr-step-title>Settings</clr-step-title>
+                        <clr-step-description>
+                            <clr-icon shape="blocks-group"></clr-icon>
+                        </clr-step-description>
+                        <clr-step-content *clrIfExpanded>
+                            ...
+                            <button clrStepButton="next">next</button>
+                        </clr-step-content>
+                    </clr-stepper-panel>
+
+                    <clr-stepper-panel formGroupName="settings">
+                        <clr-step-title>Deploy {{this.form.controls['instance'].value.instance_location| titlecase }} {{this.form.controls['instance'].value.instance_mode | titlecase }}</clr-step-title>
+                        <clr-step-description>
+                            <clr-icon shape="deploy"></clr-icon>
+                        </clr-step-description>
+                        <clr-step-content *clrIfExpanded>
+                            ...
+                            <button clrStepButton="next">next</button>
+                        </clr-step-content>
+                    </clr-stepper-panel>
+                
+                    
+
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
