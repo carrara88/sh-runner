@@ -6,7 +6,7 @@ do
 done
 
 HOSTNAME=$(eval "hostname -I")
-HOSTDATA=$( echo $HOSTNAME | tr " " "\n")
+HOSTDATA=$( echo $HOSTNAME | tr "\s" "\n")
 echo "HOSTNAME:" $HOSTDATA[0]
 
 case "$1" in
