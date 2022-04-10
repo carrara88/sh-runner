@@ -6,7 +6,7 @@ LIST=$(IFS=, ; echo "${AVAILABLES[*]}")
 
 HOSTNAME=$(eval "hostname -I")
 HOSTDATA=($HOSTNAME)
-HOST_IP=$HOSTDATA[0]
+HOST_IP=${HOSTDATA[0]}
 
 echo "HOSTNAME: ${HOST_IP}"
 
