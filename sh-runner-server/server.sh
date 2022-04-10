@@ -18,7 +18,7 @@ echo "HOSTNAME: ${HOST_IP}"
 
 case "$1" in
     "server_info")
-        echo "{ 'ip':'${HOST_IP}', 'installer_dir':'${INSTALLER_DIR}', 'installers':['${LIST}'] }"
+        echo "{ 'ip':'${HOST_IP}', 'installer_dir':'${INSTALLER_DIR}', 'installers_extension':'${INSTALLERS_EXTENSION}', 'installers':['${LIST}'] }"
     ;;
     "server_status")
         echo "{ 'auth':'cookies' } "
