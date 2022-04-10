@@ -38,7 +38,4 @@ case "$1" in
     "server_status")
         SERVER_STATUS
     ;;
-    "server_auth")
-        SERVER_STATUS
-    ;;
 esac
