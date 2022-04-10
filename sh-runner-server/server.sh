@@ -3,7 +3,7 @@
 
 INSTALLER_DIR="/var/www/sh-installer/installers"
 INSTALLERS_EXTENSION="installer.sh"
-AVAILABLES=( ${INSTALLER_DIR}/*.installer.sh )
+AVAILABLES=( ${INSTALLER_DIR}/*.${INSTALLERS_EXTENSION} )
 AVAILABLES=( "${AVAILABLES[@]##*/}" )
 AVAILABLES=( "${AVAILABLES[@]%.installer.sh}" )
 
