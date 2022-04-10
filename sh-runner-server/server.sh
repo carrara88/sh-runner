@@ -1,8 +1,9 @@
 #!/bin/bash
 
 AVAILABLES=(/var/www/sh-installer/installers/*.installer.sh)
-
-LIST=$(IFS="," ; echo "${AVAILABLES[*]}")
+for ELEMENT in AVAILABLES; do
+  LIST+="${ELEMENT}, "
+done
 
 HOSTNAME=$(eval "hostname -I")
 HOSTDATA=($HOSTNAME)
