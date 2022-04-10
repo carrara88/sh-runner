@@ -15,7 +15,8 @@ HOSTDATA=($HOSTNAME)
 HOST_IP=${HOSTDATA[0]}
 
 a=($(exec systemctl --status-all | sed 's|.* ||'))
-echo "${a}"
+printf -v al "\",\"%s" "${a[@]}"
+echo "${al}"
 SERVER_INFO(){
 sudo rm /var/www/html/runner/sh-runner/server_info.json
 sudo touch /var/www/html/runner/sh-runner/server_info.json
