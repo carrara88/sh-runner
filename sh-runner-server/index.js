@@ -20,7 +20,7 @@ app.options('*', cors())
 */
 app.get('/server_info', (req, res) => {
 
-    execFile('./server.sh', ['server_info'], (error, stdout, stderr) => {
+    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['server_info'], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
@@ -38,7 +38,7 @@ app.get('/server_info', (req, res) => {
 */
 app.get('/server_status', (req, res) => {
 
-    execFile('./server.sh', ['server_status'], (error, stdout, stderr) => {
+    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['server_status'], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
