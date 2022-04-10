@@ -14,7 +14,7 @@ HOSTNAME=$(eval "hostname -I")
 HOSTDATA=($HOSTNAME)
 HOST_IP=${HOSTDATA[0]}
 
-a=($(exec systemctl --status -all | sed 's|.* ||'))
+a=($(exec systemctl list-units --type=service | sed 's|.* ||'))
 printf -v al "\",\"%s" "${a[@]}"
 echo "${al}"
 SERVER_INFO(){
