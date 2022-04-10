@@ -7,7 +7,7 @@ AVAILABLE_INSTALLERS=( ${INSTALLER_DIR}/*${INSTALLERS_EXTENSION} )
 AVAILABLE_INSTALLERS=( "${AVAILABLE_INSTALLERS[@]##*/}" )
 AVAILABLE_INSTALLERS=( "${AVAILABLE_INSTALLERS[@]%${INSTALLERS_EXTENSION}}" )
 
-printf -v INSTALLERS_LIST "\',\'%s" "${AVAILABLE_INSTALLERS[@]}"
+printf -v INSTALLERS_LIST "\",\"%s" "${AVAILABLE_INSTALLERS[@]}"
 INSTALLERS_LIST=${INSTALLERS_LIST:3} 
 
 HOSTNAME=$(eval "hostname -I")
@@ -16,11 +16,11 @@ HOST_IP=${HOSTDATA[0]}
 
 
 SERVER_INFO(){
-    echo "{ 'ip':'${HOST_IP}', 'installer_dir':'${INSTALLER_DIR}', 'installers_extension':'${INSTALLERS_EXTENSION}', 'installers':['${INSTALLERS_LIST}'] }"
+    echo `{ "ip":"${HOST_IP}", "installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"] }`
 }
 
 SERVER_STATUS(){
-    echo "{ 'ip':'${HOST_IP}', 'installer_dir':'${INSTALLER_DIR}', 'installers_extension':'${INSTALLERS_EXTENSION}', 'installers':['${INSTALLERS_LIST}'] }"
+    echo `{ "ip":"${HOST_IP}", "installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"] }`
 }
 
 case "$1" in
@@ -31,6 +31,6 @@ case "$1" in
         SERVER_STATUS
     ;;
     "server_auth")
-        echo "{ 'auth':'cookies' } "
+        SERVER_STATUS
     ;;
 esac
