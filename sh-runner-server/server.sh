@@ -7,11 +7,12 @@ done
 
 HOSTNAME=$(eval "hostname -I")
 HOSTDATA=($HOSTNAME)
-echo "HOSTNAME: ${HOSTDATA[0]}"
+HOST_IP=$HOSTDATA[0]
+echo "HOSTNAME: ${HOST_IP}"
 
 case "$1" in
     "server_info")
-        echo "{ 'status':'running', 'serv':'${HOSTDATA[0]}' }"
+        echo "{ 'status':'running', 'serv':'${HOST_IP}' }"
     ;;
     "server_status")
         echo "{ 'auth':'cookies' } "
