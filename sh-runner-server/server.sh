@@ -1,7 +1,8 @@
 #!/bin/bash
 
-AVAILABLES=(/var/www/sh-installer/installers/*.installer.sh)
 
+INSTALLER_DIR="/var/www/sh-installer/installers"
+AVAILABLES=(basename ${INSTALLER_DIR}/*.installer.sh)
 printf -v LIST "\',\'%s" "${AVAILABLES[@]}"
 LIST=${LIST:3} 
 
@@ -13,7 +14,7 @@ echo "HOSTNAME: ${HOST_IP}"
 
 case "$1" in
     "server_info")
-        echo "{ 'status':'running', 'ip':'${HOST_IP}', 'availables':['${LIST}'] }"
+        echo "{ 'ip':'${HOST_IP}', 'installer_dir':'${INSTALLER_DIR}', 'installers':['${LIST}'] }"
     ;;
     "server_status")
         echo "{ 'auth':'cookies' } "
