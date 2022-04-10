@@ -16,6 +16,7 @@ HOST_IP=${HOSTDATA[0]}
 
 
 SERVER_INFO(){
+sudo touch /var/www/html/runner/sh-runner/server_info.json
 cat << EOF > /var/www/html/runner/sh-runner/server_info.json
 { \"ip\":\"${HOST_IP}\", \"installer_dir\":\"${INSTALLER_DIR}\", \"installers_extension\":\"${INSTALLERS_EXTENSION}\", \"installers\":[\"${INSTALLERS_LIST}\"] }
 EOF
