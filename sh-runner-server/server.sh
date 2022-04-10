@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+# SERVER VARIABLES
 INSTALLER_DIR="/var/www/sh-installer/installers"
 INSTALLERS_EXTENSION=".installer.sh"
 AVAILABLE_INSTALLERS=( ${INSTALLER_DIR}/*${INSTALLERS_EXTENSION} )
@@ -16,7 +16,9 @@ HOST_IP=${HOSTDATA[0]}
 
 
 SERVER_INFO(){
-    echo "{ \"ip\":\"${HOST_IP}\", \"installer_dir\":\"${INSTALLER_DIR}\", \"installers_extension\":\"${INSTALLERS_EXTENSION}\", \"installers\":[\"${INSTALLERS_LIST}\"] }"
+cat << EOF > /etc/letsencrypt/cli.ini
+{ \"ip\":\"${HOST_IP}\", \"installer_dir\":\"${INSTALLER_DIR}\", \"installers_extension\":\"${INSTALLERS_EXTENSION}\", \"installers\":[\"${INSTALLERS_LIST}\"] }
+EOF
 }
 
 SERVER_STATUS(){
