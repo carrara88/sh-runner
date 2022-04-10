@@ -5,9 +5,9 @@ do
     echo -n "$x "
 done
 
-HOSTNAME=hostname -I
+HOSTNAME=$(eval "hostname -I")
 
-echo "Total:" $total
+echo "HOSTNAME:" $HOSTNAME
 
 case "$1" in
     "server_info")
