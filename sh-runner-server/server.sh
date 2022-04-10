@@ -2,7 +2,7 @@
 
 AVAILABLES=(/var/www/sh-installer/installers/*.installer.sh)
 
-LIST=$(IFS=, ; echo "${AVAILABLES[*]}")
+LIST=$(IFS=',' ; echo "${AVAILABLES[*]}")
 
 HOSTNAME=$(eval "hostname -I")
 HOSTDATA=($HOSTNAME)
@@ -12,7 +12,7 @@ echo "HOSTNAME: ${HOST_IP}"
 
 case "$1" in
     "server_info")
-        echo "{ 'status':'running', 'ip':'${HOST_IP}', 'availables':[${LIST}] }"
+        echo "{ 'status':'running', 'ip':'${HOST_IP}', 'availables':['${LIST}'] }"
     ;;
     "server_status")
         echo "{ 'auth':'cookies' } "
