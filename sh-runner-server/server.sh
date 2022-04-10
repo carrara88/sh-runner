@@ -24,7 +24,11 @@ EOF
 }
 
 SERVER_STATUS(){
-    echo "{ \"ip\":\"${HOST_IP}\", \"installer_dir\":\"${INSTALLER_DIR}\", \"installers_extension\":\"${INSTALLERS_EXTENSION}\", \"installers\":[\"${INSTALLERS_LIST}\"] }"
+sudo rm /var/www/html/runner/sh-runner/server_status.json
+sudo touch /var/www/html/runner/sh-runner/server_status.json
+cat << EOF | sudo tee -a /var/www/html/runner/sh-runner/server_status.json
+{ "ip":"${HOST_IP}", "installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"] }
+EOF
 }
 
 case "$1" in
