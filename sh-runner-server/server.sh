@@ -15,16 +15,20 @@ HOSTDATA=($HOSTNAME)
 HOST_IP=${HOSTDATA[0]}
 
 
-SERVERINFO(){
+SERVER_INFO(){
+    echo "{ 'ip':'${HOST_IP}', 'installer_dir':'${INSTALLER_DIR}', 'installers_extension':'${INSTALLERS_EXTENSION}', 'installers':['${INSTALLERS_LIST}'] }"
+}
+
+SERVER_STATUS(){
     echo "{ 'ip':'${HOST_IP}', 'installer_dir':'${INSTALLER_DIR}', 'installers_extension':'${INSTALLERS_EXTENSION}', 'installers':['${INSTALLERS_LIST}'] }"
 }
 
 case "$1" in
     "server_info")
-        SERVERINFO
+        SERVER_INFO
     ;;
     "server_status")
-        echo "{ 'auth':'cookies' } "
+        SERVER_STATUS
     ;;
     "server_auth")
         echo "{ 'auth':'cookies' } "
