@@ -5,13 +5,13 @@ do
     echo -n "$x "
 done
 
-HOSTNAME=$(eval "hostname -I" | tr " " "\n")
-
-echo "HOSTNAME:" $HOSTNAME[0]
+HOSTNAME=$(eval "hostname -I")
+HOSTDATA=$( echo $HOSTNAME | tr " " "\n")
+echo "HOSTNAME:" $HOSTDATA[0]
 
 case "$1" in
     "server_info")
-        echo "{ 'status':'running', 'serv':'${HOSTNAME[0]}' }"
+        echo "{ 'status':'running', 'serv':'${HOSTDATA[0]}' }"
     ;;
     "server_status")
         echo "{ 'auth':'cookies' } "
