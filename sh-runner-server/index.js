@@ -18,7 +18,7 @@ app.options('*', cors())
 /*
 * INFO
 */
-app.get('/serverinfo', (req, res) => {
+app.get('/server_info', (req, res) => {
 
     execFile('./server.sh', ['server_info'], (error, stdout, stderr) => {
         console.log(stdout);
@@ -36,7 +36,7 @@ app.get('/serverinfo', (req, res) => {
 /*
 * STATUS
 */
-app.get('/serverinfo', (req, res) => {
+app.get('/server_status', (req, res) => {
 
     execFile('./server.sh', ['server_status'], (error, stdout, stderr) => {
         console.log(stdout);
@@ -54,7 +54,7 @@ app.get('/serverinfo', (req, res) => {
 /*
 * AUTH
 */
-app.get('/serverauth', (req, res) => {
+app.get('/server_auth', (req, res) => {
 
     execFile('./server.sh', ['server_auth'], (error, stdout, stderr) => {
         console.log(stdout);
