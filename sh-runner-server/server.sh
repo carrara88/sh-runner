@@ -16,11 +16,11 @@ HOST_IP=${HOSTDATA[0]}
 
 
 SERVER_INFO(){
-    echo `{ "ip":"${HOST_IP}", "installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"] }`
+    echo "{ \"ip\":\"${HOST_IP}\", \"installer_dir\":\"${INSTALLER_DIR}\", \"installers_extension\":\"${INSTALLERS_EXTENSION}\", \"installers\":[\"${INSTALLERS_LIST}\"] }"
 }
 
 SERVER_STATUS(){
-    echo `{ "ip":"${HOST_IP}", "installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"] }`
+    echo "{ \"ip\":\"${HOST_IP}\", \"installer_dir\":\"${INSTALLER_DIR}\", \"installers_extension\":\"${INSTALLERS_EXTENSION}\", \"installers\":[\"${INSTALLERS_LIST}\"] }"
 }
 
 case "$1" in
