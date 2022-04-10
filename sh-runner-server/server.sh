@@ -1,6 +1,6 @@
 #!/bin/bash
 
-AVAILABLES in /var/www/sh-installer/installers/*.installer.sh
+AVAILABLES=(/var/www/sh-installer/installers/*.installer.sh)
 
 LIST=$(IFS=, ; echo "${AVAILABLES[*]}")
 
