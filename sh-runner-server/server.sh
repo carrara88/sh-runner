@@ -2,9 +2,10 @@
 
 
 INSTALLER_DIR="/var/www/sh-installer/installers"
-AVAILABLES=(${INSTALLER_DIR}/*.installer.sh)
+INSTALLERS_EXTENSION="installers.sh"
+AVAILABLES=( ${INSTALLER_DIR}/*.${INSTALLERS_EXTENSION} )
 AVAILABLES=( "${AVAILABLES[@]##*/}" )
-AVAILABLES=( "${AVAILABLES[@]%.installer.sh}" )
+AVAILABLES=( "${AVAILABLES[@]%.${INSTALLERS_EXTENSION}}" )
 
 printf -v LIST "\',\'%s" "${AVAILABLES[@]}"
 LIST=${LIST:3} 
