@@ -2,7 +2,7 @@
 
 AVAILABLES=(/var/www/sh-installer/installers/*.installer.sh)
 
-LIST=$(IFS="," ; echo "'${AVAILABLES[*]}'")
+LIST=$(IFS="" ; printf ",'%s'" ${AVAILABLES[*]})
 
 HOSTNAME=$(eval "hostname -I")
 HOSTDATA=($HOSTNAME)
