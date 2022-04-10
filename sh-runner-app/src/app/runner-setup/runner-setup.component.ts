@@ -47,6 +47,7 @@ export class RunnerSetupComponent implements OnInit {
     console.log('reactive form submit', this.form.value);
   }
   ngOnInit(): void {
+    console.log(self.location.host);
     let server = this.setupService.get('http://localhost:3001/server_status');
     server.subscribe(
       (data:any)=>{
