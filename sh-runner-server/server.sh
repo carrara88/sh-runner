@@ -3,7 +3,8 @@
 
 INSTALLER_DIR="/var/www/sh-installer/installers"
 AVAILABLES=(${INSTALLER_DIR}/*.installer.sh)
-printf -v LIST "\',\'%s" "basename ${AVAILABLES[@]}"
+AVAILABLES=( "${AVAILABLES[@]##*/}" )
+printf -v LIST "\',\'%s" "${AVAILABLES[@]}"
 LIST=${LIST:3} 
 
 HOSTNAME=$(eval "hostname -I")
