@@ -3,7 +3,6 @@
 AVAILABLES=(/var/www/sh-installer/installers/*.installer.sh)
 
 printf -v LIST "\',\'%s" "${AVAILABLES[@]}"
-LIST=${LIST:1} 
 
 HOSTNAME=$(eval "hostname -I")
 HOSTDATA=($HOSTNAME)
