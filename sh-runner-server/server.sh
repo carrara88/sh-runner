@@ -1,15 +1,10 @@
 #!/bin/bash
 
-total=0
-for n in /var/www/sh-installer/installers/*.installer.sh
+for x in /var/www/sh-installer/installers/*.installer.sh
 do
-    ti=`grep while ${n} | wc -l`
-    ti=$(($ti + 0))
-    if [[ $ti -gt 0 ]]
-    then
-        total=$(($total+$ti))
-    fi
+    echo -n "$x "
 done
+
 
 echo "Total:" $total
 
