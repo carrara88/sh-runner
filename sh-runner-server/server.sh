@@ -12,7 +12,7 @@ echo "HOSTNAME: ${HOST_IP}"
 
 case "$1" in
     "server_info")
-        echo "{ 'status':'running', 'ip':'${HOST_IP}', 'availables':['${LIST}'] }"
+        echo "{ 'status':'running', 'ip':'${HOST_IP}', 'availables':[${LIST}] }"
     ;;
     "server_status")
         echo "{ 'auth':'cookies' } "
