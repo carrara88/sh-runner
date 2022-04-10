@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { SetupService } from '../services/setup.service';
 
 @Component({
   selector: 'app-runner-setup',
@@ -9,7 +10,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 export class RunnerSetupComponent implements OnInit {
 
   form: FormGroup;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, public setupService: SetupService) {
     this.form = this.formBuilder.group({
       repositories: this.formBuilder.group({
         sh_installer_git: ['https://github.com/carrara88/sh-installer', Validators.required],
@@ -46,7 +47,12 @@ export class RunnerSetupComponent implements OnInit {
     console.log('reactive form submit', this.form.value);
   }
   ngOnInit(): void {
-
+    let server = this.setupService.get('http://localhost:3001/serverauth');
+    server.subscribe(
+      (data:any)=>{
+        console.log('get server:', data);
+      }
+    );
   }
 
 }

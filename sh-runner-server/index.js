@@ -1,16 +1,66 @@
+const { execFile } = require('child_process');
+const port = process.env.NODE_PORT ||  3001; //Save the port number where your server will be listening
 const express = require('express'); //Import the express dependency
-const app = express(); //Instantiate an express app, the main work horse of this server
-const port = process.env.NODE_PORT ||  3002; //Save the port number where your server will be listening
-const { exec } = require("child_process");
+var cors = require('cors');
+var app = express();
 
 
-app.get('/', (req, res) => {
+var corsOptions = {
+        "origin": "*",
+        "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+        "preflightContinue": true,
+        "optionsSuccessStatus": 200
+}
 
-    exec('sh ./server.sh', (error, stdout, stderr) => {
+app.use(cors(corsOptions));
+app.options('*', cors())
+
+/*
+* INFO
+*/
+app.get('/serverinfo', (req, res) => {
+
+    execFile('./server.sh', ['server_info'], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
-            res.sendFile('error.html', {root: __dirname});
+            res.sendFile('error.json', {root: __dirname});
+            console.log(`exec error: ${error}`);
+        }else{
+            res.send(`${stdout}`);
+        }
+    });
+
+});
+
+/*
+* STATUS
+*/
+app.get('/serverinfo', (req, res) => {
+
+    execFile('./server.sh', ['server_status'], (error, stdout, stderr) => {
+        console.log(stdout);
+        console.log(stderr);
+        if (error !== null) {
+            res.sendFile('error.json', {root: __dirname});
+            console.log(`exec error: ${error}`);
+        }else{
+            res.send(`${stdout}`);
+        }
+    });
+
+});
+
+/*
+* AUTH
+*/
+app.get('/serverauth', (req, res) => {
+
+    execFile('./server.sh', ['server_auth'], (error, stdout, stderr) => {
+        console.log(stdout);
+        console.log(stderr);
+        if (error !== null) {
+            res.sendFile('error.json', {root: __dirname});
             console.log(`exec error: ${error}`);
         }else{
             res.send(`${stdout}`);
