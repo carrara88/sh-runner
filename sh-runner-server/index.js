@@ -56,7 +56,7 @@ app.get('/server_status', (req, res) => {
 */
 app.get('/server_auth', (req, res) => {
 
-    execFile('./server.sh', ['server_auth'], (error, stdout, stderr) => {
+    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['server_auth'], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
