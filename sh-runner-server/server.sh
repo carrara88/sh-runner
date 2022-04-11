@@ -14,15 +14,15 @@ HOSTNAME=$(eval "hostname -I")
 HOSTDATA=($HOSTNAME)
 HOST_IP=${HOSTDATA[0]}
 
-a=($(exec systemctl --type=service --plain | grep running | awk '{print $1}' | grep .service))
-printf -v al "\",\"%s" "${a[@]}"
-al=${al:3} 
+RUNNING_SERVICES=($(exec systemctl --type=service --plain | grep running | awk '{print $1}' | grep .service))
+printf -v RUNNING_SERVICES_LIST "\",\"%s" "${RUNNING_SERVICES[@]}"
+RUNNING_SERVICES_LIST=${RUNNING_SERVICES_LIST:3} 
 echo "${al}"
 SERVER_INFO(){
 sudo rm /var/www/html/runner/sh-runner/server_info.json
 sudo touch /var/www/html/runner/sh-runner/server_info.json
 cat << EOF | sudo tee -a /var/www/html/runner/sh-runner/server_info.json
-{ "ip":"${HOST_IP}", "installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"] }
+{ "ip":"${HOST_IP}", "installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"], "running_services":["${RUNNING_SERVICES_LIST}"] }
 EOF
 }
 
@@ -30,7 +30,7 @@ SERVER_STATUS(){
 sudo rm /var/www/html/runner/sh-runner/server_status.json
 sudo touch /var/www/html/runner/sh-runner/server_status.json
 cat << EOF | sudo tee -a /var/www/html/runner/sh-runner/server_status.json
-{ "ip":"${HOST_IP}", "installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"] }
+{ "ip":"${HOST_IP}", "installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"], "running_services":["${RUNNING_SERVICES_LIST}"] }
 EOF
 }
 
