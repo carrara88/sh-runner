@@ -10,7 +10,8 @@ AVAILABLE_INSTALLERS=( ${INSTALLER_DIR}/*${INSTALLERS_EXTENSION} )
 AVAILABLE_INSTALLERS=( "${AVAILABLE_INSTALLERS[@]##*/}" )
 AVAILABLE_INSTALLERS=( "${AVAILABLE_INSTALLERS[@]%${INSTALLERS_EXTENSION}}" )
 
-
+source "${SERVER_DIR}/scripts/parameters.script.sh"
+LOAD_PARAMETERS $1 $2 $3 $4 $5 $6 $7 $8 $9
 source "${SERVER_DIR}/scripts/status.script.sh"
 source "${SERVER_DIR}/scripts/auth.script.sh"
 
@@ -19,14 +20,17 @@ source "${SERVER_DIR}/scripts/auth.script.sh"
 
 
 
-case "$1" in
+case "$_REQUEST" in
     "server_info")
+        # status.script.sh
         SERVER_INFO
     ;;
     "server_status")
+        # status.script.sh
         SERVER_STATUS
     ;;
     "auth")
+        # auth.script.sh
         AUTHENTICATE
     ;;
 esac
