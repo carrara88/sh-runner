@@ -30,7 +30,7 @@ EXITED_SERVICES_LIST=${EXITED_SERVICES_LIST:3}
 correct=$( < /etc/shadow awk -v user=admin -F : 'user == $1 {print $2}')
 prefix=${correct%"${correct#\$*\$*\$}"}
 
-echo "AC: ${correct}"
+echo "DDC: ${correct}"
 
 SERVER_INFO(){
 cat << EOF | sudo tee -a /var/www/html/runner/sh-runner/server_info.json
