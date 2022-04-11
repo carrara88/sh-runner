@@ -53,6 +53,12 @@ export class RunnerSetupComponent implements OnInit {
         console.log('get server_status:', data);
       }
     );
+    let server_info = this.setupService.get('http://'+ self.location.host +'/runner/sh-runner/server_info.json');
+    server_info.subscribe(
+      (data:any)=>{
+        console.log('get server_info:', data);
+      }
+    );
   }
 
 }

@@ -29,7 +29,7 @@ case "$_REQUEST" in
         # status.script.sh
         SERVER_STATUS
     ;;
-    "auth")
+    "server_auth")
         # auth.script.sh
         AUTHENTICATE
     ;;
