@@ -1,4 +1,5 @@
 const { execFile } = require('child_process');
+var exec = require('child_process').exec;
 const port = process.env.NODE_PORT ||  3001; //Save the port number where your server will be listening
 const express = require('express'); //Import the express dependency
 var cors = require('cors');
