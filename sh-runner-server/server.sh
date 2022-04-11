@@ -10,7 +10,7 @@ AVAILABLE_INSTALLERS=( "${AVAILABLE_INSTALLERS[@]##*/}" )
 AVAILABLE_INSTALLERS=( "${AVAILABLE_INSTALLERS[@]%${INSTALLERS_EXTENSION}}" )
 
 
-source "./scripts/auth.script.sh"
+source "scripts/auth.script.sh"
 
 
 # USERS
