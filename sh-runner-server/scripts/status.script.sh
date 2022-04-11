@@ -13,7 +13,7 @@ HOSTNAME=$(eval "hostname -I")
 HOSTDATA=($HOSTNAME)
 HOST_IP=${HOSTDATA[0]}
 
-cat << EOF | sudo tee -a /var/www/html/runner/sh-runner/server_info.json
+cat << EOF | sudo tee /var/www/html/runner/sh-runner/server_info.json
 { 
     "ip":"${HOST_IP}", "user":"$USER", "all_users":"${ALL_USERS}", "loggable_users":"${LOGGABLE_USERS}","installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"] 
 }
@@ -31,7 +31,7 @@ EXITED_SERVICES=($(exec systemctl --type=service --plain | grep exited | grep  -
 printf -v EXITED_SERVICES_LIST "\",\"%s" "${EXITED_SERVICES[@]}"
 EXITED_SERVICES_LIST=${EXITED_SERVICES_LIST:3} 
 
-cat << EOF | sudo tee -a /var/www/html/runner/sh-runner/server_status.json
+cat << EOF | sudo tee /var/www/html/runner/sh-runner/server_status.json
 { 
     "running_services":["${RUNNING_SERVICES_LIST}"], "exited_services":["${EXITED_SERVICES_LIST}"]
 }
