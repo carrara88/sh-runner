@@ -10,7 +10,7 @@
 
 
 echo "################################################################"
-echo "-> Setup for sh-runner (extra-setup: Node.js + nginx)"
+echo "-> Setup for sh-runner (extra: Node.js + nginx)"
 
 
 echo "################################################################"
