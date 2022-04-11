@@ -17,7 +17,7 @@ HOST_IP=${HOSTDATA[0]}
 RUNNING_SERVICES=($(exec systemctl --type=service --plain | grep running | awk '{print $1}' | grep .service))
 printf -v RUNNING_SERVICES_LIST "\",\"%s" "${RUNNING_SERVICES[@]}"
 RUNNING_SERVICES_LIST=${RUNNING_SERVICES_LIST:3} 
-echo "${al}"
+
 SERVER_INFO(){
 sudo rm /var/www/html/runner/sh-runner/server_info.json
 sudo touch /var/www/html/runner/sh-runner/server_info.json
