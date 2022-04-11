@@ -8,10 +8,10 @@ SIGNIN(){
     IFS='$' read -a PWD_ARRAY <<< "$ORIGINAL_PASSWORD"
     ENTERED_PASSWORD=$(openssl passwd -${PWD_ARRAY[1]} -salt ${PWD_ARRAY[2]} $_PASSWORD)
     if [ $ENTERED_PASSWORD == $ORIGINAL_PASSWORD ] ; then
-    echo "{ \"auth\":true }"
+    echo "{ \"auth\":true, \"user\":\"$_USERNAME\" }"
     AUTHENTICATED="true"
     else
-    echo "{ \"auth\":false }"
+    echo "{ \"auth\":false, \"user\":\"$_USERNAME\" }"
     AUTHENTICATED="false"
     fi
     #history -d -10--1
