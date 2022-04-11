@@ -15,11 +15,9 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors())
 
-/*
-* INFO
-*/
-app.get('/server_info', (req, res) => {
 
+
+function serverInfo(){
     execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_info'], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
@@ -30,14 +28,10 @@ app.get('/server_info', (req, res) => {
             res.send(`${stdout}`);
         }
     });
+}
 
-});
 
-/*
-* STATUS
-*/
-app.get('/server_status', (req, res) => {
-
+function serverStatus(){
     execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_status'], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
@@ -48,14 +42,34 @@ app.get('/server_status', (req, res) => {
             res.send(`${stdout}`);
         }
     });
+}
 
+/*
+* INIT
+*/
+app.get('/server_init', (req, res) => {
+    serverInfo();
+    serverStatus();
+});
+
+/*
+* INFO
+*/
+app.get('/server_info', (req, res) => {
+    serverInfo();
+});
+
+/*
+* STATUS
+*/
+app.get('/server_status', (req, res) => {
+    serverStatus();
 });
 
 /*
 * AUTH
 */
 app.get('/server_auth', (req, res) => {
-
     execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_auth'], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
@@ -66,7 +80,6 @@ app.get('/server_auth', (req, res) => {
             res.send(`${stdout}`);
         }
     });
-
 });
 
 app.listen(port, () => {            //server starts listening for any attempts from a client to connect at port: {port}
