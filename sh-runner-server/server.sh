@@ -18,11 +18,16 @@ RUNNING_SERVICES=($(exec systemctl --type=service --plain | grep running | awk '
 printf -v RUNNING_SERVICES_LIST "\",\"%s" "${RUNNING_SERVICES[@]}"
 RUNNING_SERVICES_LIST=${RUNNING_SERVICES_LIST:3} 
 
+EXITED_SERVICES=($(exec systemctl --type=service --plain | grep exited | awk '{print $1}' | grep .service))
+printf -v EXITED_SERVICES_LIST "\",\"%s" "${EXITED_SERVICES[@]}"
+EXITED_SERVICES_LIST=${EXITED_SERVICES_LIST:3} 
+
+
 SERVER_INFO(){
 sudo rm /var/www/html/runner/sh-runner/server_info.json
 sudo touch /var/www/html/runner/sh-runner/server_info.json
 cat << EOF | sudo tee -a /var/www/html/runner/sh-runner/server_info.json
-{ "ip":"${HOST_IP}", "installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"], "running_services":["${RUNNING_SERVICES_LIST}"] }
+{ "ip":"${HOST_IP}", "installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"], "running_services":["${RUNNING_SERVICES_LIST}"], "exited_services":["${EXITED_SERVICES_LIST}"] }
 EOF
 }
 
