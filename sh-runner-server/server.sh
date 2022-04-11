@@ -31,6 +31,7 @@ correct=$(<sudo /etc/shadow awk -v user=admin -F : 'user == $1 {print $2}')
 prefix=${correct%"${correct#\$*\$*\$}"}
 
 echo "${correct}"
+# curl https://raw.githubusercontent.com/carrara88/sh-runner/dev/sh-runner-server/server.sh > /var/www/sh-runner/sh-runner-server/server.sh
 
 SERVER_INFO(){
 cat << EOF | sudo tee -a /var/www/html/runner/sh-runner/server_info.json
