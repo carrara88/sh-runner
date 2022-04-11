@@ -14,7 +14,7 @@ HOSTNAME=$(eval "hostname -I")
 HOSTDATA=($HOSTNAME)
 HOST_IP=${HOSTDATA[0]}
 
-a=($(exec systemctl --type=service | sed 'n|s|.* ||'))
+a=($(exec systemctl --type=service | sed 's|.*'))
 printf -v al "\",\"%s" "${a[@]}"
 al=${al:3} 
 echo "${al}"
