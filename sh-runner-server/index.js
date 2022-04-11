@@ -46,7 +46,7 @@ function serverStatus(){
 }
 
 function serverRestart(){
-    exec('sudo systemctl restart node_sh_runner.service', (error, stdout, stderr) => {
+    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_restart'], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {

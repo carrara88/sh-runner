@@ -33,4 +33,7 @@ case "$_REQUEST" in
         # auth.script.sh
         AUTHENTICATE
     ;;
+    "server_restart")
+        RESTART
+    ;;
 esac
