@@ -1,5 +1,6 @@
 #!/bin/bash
 
+AUTHENTICATED=false
 # AUTH
 AUTHENTICATE(){
     FILE='/etc/shadow'
@@ -8,13 +9,18 @@ AUTHENTICATE(){
     ENTERED_PASSWORD=$(openssl passwd -${PWD_ARRAY[1]} -salt ${PWD_ARRAY[2]} $_PASSWORD)
     if [ $ENTERED_PASSWORD == $ORIGINAL_PASSWORD ] ; then
     echo "{ \"auth\":true }"
+    AUTHENTICATED=true
     else
     echo "{ \"auth\":false }"
+    AUTHENTICATED=false
     fi
     #history -d -10--1
 }
 
 _RESTART(){
+    AUTHENTICATED=false
+    if [ AUTHENTICATED ] ; then
     sudo systemctl restart node_sh_runner.service
     echo "{ \"restart\":true }"
+    fi
 }
