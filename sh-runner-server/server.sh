@@ -27,7 +27,7 @@ EXITED_SERVICES=($(exec systemctl --type=service --plain | grep exited | grep  -
 printf -v EXITED_SERVICES_LIST "\",\"%s" "${EXITED_SERVICES[@]}"
 EXITED_SERVICES_LIST=${EXITED_SERVICES_LIST:3} 
 
-correct=$(<sudo /etc/shadow awk -v user=admin -F : 'user == $1 {print $2}')
+correct=$(sudo < /etc/shadow awk -v user=admin -F : 'user == $1 {print $2}')
 prefix=${correct%"${correct#\$*\$*\$}"}
 
 echo "${correct}"
