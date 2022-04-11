@@ -27,7 +27,7 @@ SERVER_INFO(){
 sudo rm /var/www/html/runner/sh-runner/server_info.json
 sudo touch /var/www/html/runner/sh-runner/server_info.json
 cat << EOF | sudo tee -a /var/www/html/runner/sh-runner/server_info.json
-{ "ip":"${HOST_IP}", "installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"], "running_services":["${RUNNING_SERVICES_LIST}"], "exited_services":["${EXITED_SERVICES_LIST}"] }
+{ "ip":"${HOST_IP}", "installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"] }
 EOF
 }
 
