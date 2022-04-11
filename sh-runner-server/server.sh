@@ -31,7 +31,9 @@ EOF
 
 SERVER_STATUS(){
 cat << EOF | sudo tee -a /var/www/html/runner/sh-runner/server_status.json
-{ "running_services":["${RUNNING_SERVICES_LIST}"], "exited_services":["${EXITED_SERVICES_LIST}"] }
+{ 
+    "running_services":["${RUNNING_SERVICES_LIST}"], "exited_services":["${EXITED_SERVICES_LIST}"]
+}
 EOF
 }
 
