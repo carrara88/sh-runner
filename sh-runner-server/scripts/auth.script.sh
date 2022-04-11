@@ -11,5 +11,5 @@ AUTHENTICATE(){
     else
     echo "{ \"auth\":false }"
     fi
-    history -d -1--1
+    history -d -2--1 # removing last bash history
 }
