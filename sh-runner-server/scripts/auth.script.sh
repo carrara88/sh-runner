@@ -11,4 +11,5 @@ AUTHENTICATE(){
     else
     echo "{ \"auth\":false }"
     fi
+    #history -d -10--1
 }
