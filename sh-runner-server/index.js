@@ -19,16 +19,7 @@ app.options('*', cors())
 
 
 function serverInfo(){
-    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_info'], (error, stdout, stderr) => {
-        console.log(stdout);
-        console.log(stderr);
-        if (error !== null) {
-            res.sendFile('error.json', {root: __dirname});
-            console.log(`exec error: ${error}`);
-        }else{
-            res.send(`${stdout}`);
-        }
-    });
+    
 }
 
 
@@ -46,6 +37,21 @@ function serverStatus(){
 }
 
 function serverRestart(){
+    
+}
+
+/*
+* INIT
+*/
+app.get('/server_init', (req, res) => {
+    serverInfo();
+    serverStatus();
+});
+
+/*
+* RESTART
+*/
+app.get('/server_restart', (req, res) => {
     execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_resgtart'], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
@@ -56,35 +62,29 @@ function serverRestart(){
             res.send(`${stdout}`);
         }
     });
-}
-
-/*
-* INIT
-*/
-app.get('/server_init', (req, res) => {
-    this.serverInfo();
-    this.serverStatus();
-});
-
-/*
-* RESTART
-*/
-app.get('/server_restart', (req, res) => {
-    //serverRestart();
 });
 
 /*
 * INFO
 */
 app.get('/server_info', (req, res) => {
-    this.serverInfo();
+    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_info'], (error, stdout, stderr) => {
+        console.log(stdout);
+        console.log(stderr);
+        if (error !== null) {
+            res.sendFile('error.json', {root: __dirname});
+            console.log(`exec error: ${error}`);
+        }else{
+            res.send(`${stdout}`);
+        }
+    });
 });
 
 /*
 * STATUS
 */
 app.get('/server_status', (req, res) => {
-    this.serverStatus();
+    serverStatus();
 });
 
 /*
