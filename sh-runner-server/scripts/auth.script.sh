@@ -11,5 +11,4 @@ AUTHENTICATE(){
     else
     echo "{ \"auth\":false }"
     fi
-    sudo history -d -2--1 # removing last bash history
 }
