@@ -62,8 +62,8 @@ function serverRestart(){
 * INIT
 */
 app.get('/server_init', (req, res) => {
-    serverInfo();
-    serverStatus();
+    this.serverInfo();
+    this.serverStatus();
 });
 
 /*
@@ -77,14 +77,14 @@ app.get('/server_restart', (req, res) => {
 * INFO
 */
 app.get('/server_info', (req, res) => {
-    serverInfo();
+    this.serverInfo();
 });
 
 /*
 * STATUS
 */
 app.get('/server_status', (req, res) => {
-    serverStatus();
+    this.serverStatus();
 });
 
 /*
