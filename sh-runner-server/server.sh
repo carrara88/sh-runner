@@ -35,7 +35,7 @@ SERVER_STATUS(){
 sudo rm /var/www/html/runner/sh-runner/server_status.json
 sudo touch /var/www/html/runner/sh-runner/server_status.json
 cat << EOF | sudo tee -a /var/www/html/runner/sh-runner/server_status.json
-{ "ip":"${HOST_IP}", "installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"], "running_services":["${RUNNING_SERVICES_LIST}"] }
+{ "running_services":["${RUNNING_SERVICES_LIST}"], "exited_services":["${EXITED_SERVICES_LIST}"] }
 EOF
 }
 
