@@ -27,10 +27,25 @@ EXITED_SERVICES=($(exec systemctl --type=service --plain | grep exited | grep  -
 printf -v EXITED_SERVICES_LIST "\",\"%s" "${EXITED_SERVICES[@]}"
 EXITED_SERVICES_LIST=${EXITED_SERVICES_LIST:3} 
 
-correct=$( sudo bash -c "< /etc/shadow awk -v user=admin -F : 'user == $1 {print $2}'")
+correct=$( < sudo egrep -v - /etc/shadow | awk -v user=admin -F : 'user == $1 {print $2}')
 prefix=${correct%"${correct#\$*\$*\$}"}
 
 echo "DDC: ${correct}"
+
+AUTHENTICATE(){
+    FILE='/etc/shadow'
+    read -p 'Enter user name: ' USER_NAME
+    read -sp 'Enter password: ' USER_PASSWORD
+    echo ""
+    ORIGINAL_PASSWORD=$(sudo awk -F: -v pattern="^$USER_NAME" '$0 ~ pattern {print $2}' "$FILE" )
+    IFS='$' read -a PWD_ARRAY <<< "$ORIGINAL_PASSWORD"
+    ENTERED_PASSWORD=$(openssl passwd -${PWD_ARRAY[1]} -salt ${PWD_ARRAY[2]} $USER_PASSWORD)
+    if [ $ENTERED_PASSWORD == $ORIGINAL_PASSWORD ] ; then
+    echo "Authenticated"
+    else
+    echo "Not Authenticated"
+    fi
+}
 
 SERVER_INFO(){
 cat << EOF | sudo tee -a /var/www/html/runner/sh-runner/server_info.json
@@ -52,5 +67,8 @@ case "$1" in
     ;;
     "server_status")
         SERVER_STATUS
+    ;;
+    "auth")
+        AUTHENTICATE
     ;;
 esac
