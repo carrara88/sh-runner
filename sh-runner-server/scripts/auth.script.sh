@@ -15,5 +15,6 @@ AUTHENTICATE(){
 }
 
 _RESTART(){
-    sudo systemctl restart node_sh_runner.service
+    #sudo systemctl restart node_sh_runner.service
+    echo "restart"
 }
