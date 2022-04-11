@@ -16,38 +16,6 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors())
 
-
-
-function serverInfo(){
-    
-}
-
-
-function serverStatus(){
-    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_status'], (error, stdout, stderr) => {
-        console.log(stdout);
-        console.log(stderr);
-        if (error !== null) {
-            res.sendFile('error.json', {root: __dirname});
-            console.log(`exec error: ${error}`);
-        }else{
-            res.send(`${stdout}`);
-        }
-    });
-}
-
-function serverRestart(){
-    
-}
-
-/*
-* INIT
-*/
-app.get('/server_init', (req, res) => {
-    serverInfo();
-    serverStatus();
-});
-
 /*
 * RESTART
 */
@@ -84,7 +52,16 @@ app.get('/server_info', (req, res) => {
 * STATUS
 */
 app.get('/server_status', (req, res) => {
-    serverStatus();
+    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_status'], (error, stdout, stderr) => {
+        console.log(stdout);
+        console.log(stderr);
+        if (error !== null) {
+            res.sendFile('error.json', {root: __dirname});
+            console.log(`exec error: ${error}`);
+        }else{
+            res.send(`${stdout}`);
+        }
+    });
 });
 
 /*
