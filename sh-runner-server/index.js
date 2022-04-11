@@ -44,12 +44,32 @@ function serverStatus(){
     });
 }
 
+function serverRestart(){
+    exec('sudo systemctl restart node_sh_runner.service', (error, stdout, stderr) => {
+        console.log(stdout);
+        console.log(stderr);
+        if (error !== null) {
+            res.sendFile('error.json', {root: __dirname});
+            console.log(`exec error: ${error}`);
+        }else{
+            res.send(`${stdout}`);
+        }
+    });
+}
+
 /*
 * INIT
 */
 app.get('/server_init', (req, res) => {
     serverInfo();
     serverStatus();
+});
+
+/*
+* RESTART
+*/
+app.get('/server_restart', (req, res) => {
+    serverRestart();
 });
 
 /*
