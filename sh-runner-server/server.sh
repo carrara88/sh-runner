@@ -14,11 +14,11 @@ HOSTNAME=$(eval "hostname -I")
 HOSTDATA=($HOSTNAME)
 HOST_IP=${HOSTDATA[0]}
 
-RUNNING_SERVICES=($(exec systemctl --type=service --plain | grep running | awk '{print $1}' | grep .service))
+RUNNING_SERVICES=($(exec systemctl --type=service --plain | grep running | grep  -v '\\' | awk '{print $1}' | grep .service))
 printf -v RUNNING_SERVICES_LIST "\",\"%s" "${RUNNING_SERVICES[@]}"
 RUNNING_SERVICES_LIST=${RUNNING_SERVICES_LIST:3} 
 
-EXITED_SERVICES=($(exec systemctl --type=service --plain | grep exited | awk '{print $1}' | grep .service))
+EXITED_SERVICES=($(exec systemctl --type=service --plain | grep exited | grep  -v '\\' | awk '{print $1}' | grep .service))
 printf -v EXITED_SERVICES_LIST "\",\"%s" "${EXITED_SERVICES[@]}"
 EXITED_SERVICES_LIST=${EXITED_SERVICES_LIST:3} 
 
