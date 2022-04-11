@@ -34,6 +34,6 @@ case "$_REQUEST" in
         AUTHENTICATE
     ;;
     "server_restart")
-        RESTART
+        _RESTART
     ;;
 esac

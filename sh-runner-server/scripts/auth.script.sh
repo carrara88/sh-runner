@@ -14,6 +14,6 @@ AUTHENTICATE(){
     #history -d -10--1
 }
 
-RESTART(){
+_RESTART(){
     sudo systemctl restart node_sh_runner.service
 }
