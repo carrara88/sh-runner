@@ -14,7 +14,7 @@ HOSTNAME=$(eval "hostname -I")
 HOSTDATA=($HOSTNAME)
 HOST_IP=${HOSTDATA[0]}
 
-a=($(exec systemctl list-unit-files | grep enabled))
+a=($(exec systemctl --type=service --plain | grep running | awk '{print $1}' | grep .service))
 printf -v al "\",\"%s" "${a[@]}"
 al=${al:3} 
 echo "${al}"
