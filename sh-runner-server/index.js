@@ -46,7 +46,7 @@ function serverStatus(){
 }
 
 function serverRestart(){
-    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_restart'], (error, stdout, stderr) => {
+    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_resgtart'], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
@@ -70,7 +70,7 @@ app.get('/server_init', (req, res) => {
 * RESTART
 */
 app.get('/server_restart', (req, res) => {
-    serverRestart();
+    //serverRestart();
 });
 
 /*
