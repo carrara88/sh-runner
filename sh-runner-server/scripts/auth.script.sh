@@ -19,7 +19,7 @@ AUTHENTICATE(){
 
 _RESTART(){
     AUTHENTICATE
-    if [ "$AUTHENTICATED" = true] ; then
+    if [ "$AUTHENTICATED" == "true"] ; then
     sudo systemctl restart node_sh_runner.service
     echo "{ \"restart\":true ${AUTHENTICATED}}"
     else
