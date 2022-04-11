@@ -24,21 +24,21 @@ EOF
 SERVER_STATUS(){
 AUTHENTICATE
 if [ "$AUTHENTICATED" == "true" ] ; then
-# RUNNING SERVICES
-RUNNING_SERVICES=($(exec systemctl --type=service --plain | grep running | grep  -v '\\' | awk '{print $1}' | grep .service))
-printf -v RUNNING_SERVICES_LIST "\",\"%s" "${RUNNING_SERVICES[@]}"
-RUNNING_SERVICES_LIST=${RUNNING_SERVICES_LIST:3} 
-# EXITED SERVICES
-EXITED_SERVICES=($(exec systemctl --type=service --plain | grep exited | grep  -v '\\' | awk '{print $1}' | grep .service))
-printf -v EXITED_SERVICES_LIST "\",\"%s" "${EXITED_SERVICES[@]}"
-EXITED_SERVICES_LIST=${EXITED_SERVICES_LIST:3} 
+    # RUNNING SERVICES
+    RUNNING_SERVICES=($(exec systemctl --type=service --plain | grep running | grep  -v '\\' | awk '{print $1}' | grep .service))
+    printf -v RUNNING_SERVICES_LIST "\",\"%s" "${RUNNING_SERVICES[@]}"
+    RUNNING_SERVICES_LIST=${RUNNING_SERVICES_LIST:3} 
+    # EXITED SERVICES
+    EXITED_SERVICES=($(exec systemctl --type=service --plain | grep exited | grep  -v '\\' | awk '{print $1}' | grep .service))
+    printf -v EXITED_SERVICES_LIST "\",\"%s" "${EXITED_SERVICES[@]}"
+    EXITED_SERVICES_LIST=${EXITED_SERVICES_LIST:3} 
 
-cat << EOF | sudo tee /var/www/html/runner/sh-runner/server_status.json
+    cat << EOF | sudo tee /var/www/html/runner/sh-runner/server_status.json
 { 
     "running_services":["${RUNNING_SERVICES_LIST}"], "exited_services":["${EXITED_SERVICES_LIST}"]
 }
 EOF
 else
-echo "{ \"status\":false}"
+    echo "{ \"status\":false}"
 fi
 }
