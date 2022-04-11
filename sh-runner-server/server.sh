@@ -14,8 +14,9 @@ HOSTNAME=$(eval "hostname -I")
 HOSTDATA=($HOSTNAME)
 HOST_IP=${HOSTDATA[0]}
 
-a=($(exec systemctl --type=service | sed '\n ||'))
+a=($(exec systemctl --type=service | sed 's|.* ||'))
 printf -v al "\",\"%s" "${a[@]}"
+al=${al:3} 
 echo "${al}"
 SERVER_INFO(){
 sudo rm /var/www/html/runner/sh-runner/server_info.json
