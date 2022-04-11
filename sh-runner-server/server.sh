@@ -29,7 +29,7 @@ EXITED_SERVICES_LIST=${EXITED_SERVICES_LIST:3}
 
 SERVER_INFO(){
 cat << EOF | sudo tee -a /var/www/html/runner/sh-runner/server_info.json
-{ "ip":"${HOST_IP}", "users":"${USERS}","installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"] }
+{ "ip":"${HOST_IP}", "user":"$USER", "system_users":"${USERS}","installer_dir":"${INSTALLER_DIR}", "installers_extension":"${INSTALLERS_EXTENSION}", "installers":["${INSTALLERS_LIST}"] }
 EOF
 }
 
