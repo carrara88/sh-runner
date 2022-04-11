@@ -12,8 +12,8 @@ AVAILABLE_INSTALLERS=( "${AVAILABLE_INSTALLERS[@]%${INSTALLERS_EXTENSION}}" )
 
 source "${SERVER_DIR}/scripts/parameters.script.sh"
 LOAD_PARAMETERS $1 $2 $3 $4 $5 $6 $7 $8 $9
-source "${SERVER_DIR}/scripts/status.script.sh"
 source "${SERVER_DIR}/scripts/auth.script.sh"
+source "${SERVER_DIR}/scripts/status.script.sh"
 
 
 
@@ -32,6 +32,10 @@ case "$_REQUEST" in
     "server_auth")
         # auth.script.sh
         AUTHENTICATE
+    ;;
+    "server_signin")
+        # auth.script.sh
+        SIGNIN
     ;;
     "server_restart")
         _RESTART

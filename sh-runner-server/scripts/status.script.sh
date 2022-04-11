@@ -22,6 +22,8 @@ EOF
 
 
 SERVER_STATUS(){
+AUTHENTICATE
+if [ "$AUTHENTICATED" == "true" ] ; then
 # RUNNING SERVICES
 RUNNING_SERVICES=($(exec systemctl --type=service --plain | grep running | grep  -v '\\' | awk '{print $1}' | grep .service))
 printf -v RUNNING_SERVICES_LIST "\",\"%s" "${RUNNING_SERVICES[@]}"
@@ -36,4 +38,7 @@ cat << EOF | sudo tee /var/www/html/runner/sh-runner/server_status.json
     "running_services":["${RUNNING_SERVICES_LIST}"], "exited_services":["${EXITED_SERVICES_LIST}"]
 }
 EOF
+else
+echo "{ \"status\":false}"
+fi
 }
