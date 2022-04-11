@@ -8,6 +8,11 @@ INSTALLERS_EXTENSION=".installer.sh"
 AVAILABLE_INSTALLERS=( ${INSTALLER_DIR}/*${INSTALLERS_EXTENSION} )
 AVAILABLE_INSTALLERS=( "${AVAILABLE_INSTALLERS[@]##*/}" )
 AVAILABLE_INSTALLERS=( "${AVAILABLE_INSTALLERS[@]%${INSTALLERS_EXTENSION}}" )
+
+
+source "scripts/auth.script.sh"
+
+
 # USERS
 ALL_USERS=($(eval cut -d: -f1 /etc/passwd))
 LOGGABLE_USERS=($(eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1 ))
