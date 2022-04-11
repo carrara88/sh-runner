@@ -5,5 +5,5 @@
 
 sudo rm -f /var/www/sh-runner/sh-runner-server/server.sh
 sudo touch /var/www/sh-runner/sh-runner-server/server.sh
-sudo curl https://raw.githubusercontent.com/carrara88/sh-runner/dev/sh-runner-server/server.sh > sudo /var/www/sh-runner/sh-runner-server/server.sh
+sudo bash -c "curl https://raw.githubusercontent.com/carrara88/sh-runner/dev/sh-runner-server/server.sh > /var/www/sh-runner/sh-runner-server/server.sh"
 sudo chmod 755 /var/www/sh-runner/sh-runner-server/server.sh
