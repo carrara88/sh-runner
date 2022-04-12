@@ -47,6 +47,7 @@ export class RunnerAuthComponent implements OnInit {
    */
   authenticate(){
     this.loading=true;
+    this.response="";
     let server_auth = this.setupService.post(
       'http://'+ this.form.controls["connection"].value.host +':'+ this.form.controls["connection"].value.port +
       '/_request/server_signin',
@@ -59,10 +60,15 @@ export class RunnerAuthComponent implements OnInit {
       (data:any)=>{
         this.loading=false;
         console.log('get authenticate:', data);
-        
-        this.credentials.username=this.form.controls["signin"].value.username;
-        this.credentials.password=this.form.controls["signin"].value.password;
-        this.authenticated=true;
+        if(data.body.authentication==true){
+          this.authenticated=true;
+          this.credentials.username=this.form.controls["signin"].value.username;
+          this.credentials.password=this.form.controls["signin"].value.password;
+          this.response="Great! Ready to start!";
+        }else{
+          this.authenticated=false;
+          this.response="Ah ah ah! You didn't say the magic word!";
+        }
         if(data.body.error!=undefined){
           this.response="Ah ah ah! You didn't say the magic word! #"+data.body.error;
           this.authenticated=false;
@@ -76,6 +82,7 @@ export class RunnerAuthComponent implements OnInit {
    */
   check_connection(){
     this.loading=true;
+    this.response="";
     let server_info = this.setupService.get(
       'http://'+ this.form.controls["connection"].value.host +':'+ this.form.controls["connection"].value.port +
       '/request/server_info',
