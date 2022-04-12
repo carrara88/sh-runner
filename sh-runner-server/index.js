@@ -67,8 +67,8 @@ app.get('/server_status/:username/:password', (req, res) => {
 /*
 * AUTH
 */
-app.get('/server_auth', (req, res) => {
-    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_auth'], (error, stdout, stderr) => {
+app.get('/server_signin/:username/:password', (req, res) => {
+    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_signin'], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
