@@ -22,7 +22,7 @@ app.options('*', cors())
 
 
 /*
-* RESTART (_POST)
+* REQUEST (_POST)
 */
 app.get('/_request/:request', (req, res) => {
     execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req='+req.params.request,'-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
@@ -57,7 +57,7 @@ app.get('/server_restart', (req, res) => {
 });
 
 /*
-* INFO
+* INFO (_GET)
 */
 app.get('/server_info', (req, res) => {
     execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_info'], (error, stdout, stderr) => {
