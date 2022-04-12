@@ -22,13 +22,14 @@
                         <clr-control-helper>port</clr-control-helper>
                         <clr-control-error *clrIfError="'required'">[Port] Required</clr-control-error>
                     </clr-input-container>
+                    <button clrStepButton="next">Check Connection</button>
                 </clr-step-content>
             </clr-stepper-panel>
 
             <clr-stepper-panel formGroupName="signin">
-                <clr-step-title>Sign-in</clr-step-title>
+                <clr-step-title>Sign In</clr-step-title>
                 <clr-step-description>
-                    <clr-icon shape="badge"></clr-icon>
+                    <clr-icon shape="id-badge"></clr-icon>
                 </clr-step-description>
                 <clr-step-content *clrIfExpanded>
                     <clr-input-container>
@@ -45,6 +46,7 @@
                         <clr-control-error *clrIfError="'required'">[Password] Required</clr-control-error>
                     </clr-input-container>
                 </clr-step-content>
+                <button clrStepButton="next">Sign In</button>
             </clr-stepper-panel>
 
             
