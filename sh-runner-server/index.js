@@ -24,7 +24,7 @@ app.options('*', cors())
 /*
 * REQUEST (_POST)
 */
-app.get('/_request/:request', (req, res) => {
+app.post('/_request/:request', (req, res) => {
     execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req='+req.params.request,'-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
