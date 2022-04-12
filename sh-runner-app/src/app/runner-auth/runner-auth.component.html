@@ -23,7 +23,7 @@
                         <clr-control-error *clrIfError="'required'">[Port] Required</clr-control-error>
                     </clr-input-container>
                     <button (click)="check_connection()">Check Connection</button>
-                    <button *ngIf="server_info.loggable_users" clrStepButton="next">Sign In</button>
+                    <button *ngIf="connected" clrStepButton="next">Sign In</button>
                 </clr-step-content>
             </clr-stepper-panel>
 
@@ -47,13 +47,16 @@
                         <clr-control-error *clrIfError="'required'">[Password] Required</clr-control-error>
                     </clr-input-container>
                 </clr-step-content>
-                <button clrStepButton="next">Sign In</button>
+                <button *ngIf="authenticated" clrStepButton="next">Sign In</button>
             </clr-stepper-panel>
 
             
         </form>
     </div>
     <div class="modal-footer">
-        <p>Ah ah ah! You didn't say the magic word! Please Sign In!</p>
+        <div *ngIf="loading" class="progress loop">
+            <progress></progress>
+        </div>
+        <div>{{response}}</div>
     </div>
   </clr-modal>
