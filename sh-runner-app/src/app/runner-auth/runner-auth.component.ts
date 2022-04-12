@@ -11,6 +11,9 @@ export class RunnerAuthComponent implements OnInit {
 
   openSignIn=true;
   form: FormGroup;
+  server_info:any={
+    loggable_users:undefined
+  };
 
   constructor(private formBuilder: FormBuilder, public setupService: SetupService) {
     this.form = this.formBuilder.group({
@@ -37,6 +40,20 @@ export class RunnerAuthComponent implements OnInit {
     server_auth.subscribe(
       (data:any)=>{
         console.log('get authenticate:', data);
+      }
+    );
+  }
+
+  check_connection(){
+    let server_info = this.setupService.get(
+      'http://'+ this.form.controls["connection"].value.host +':'+ this.form.controls["connection"].value.port +
+      '/request/server_info',
+    );
+    server_info.subscribe(
+      (data:any)=>{
+        if(data.body.loggable_users!=undefined)
+          this.server_info.loggable_users=data.body.loggable_users;
+        console.log('get server_info:', data);
       }
     );
   }
