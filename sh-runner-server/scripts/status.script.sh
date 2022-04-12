@@ -39,6 +39,6 @@ if [ "$AUTHENTICATED" == "true" ] ; then
 }
 EOF
 else
-    echo "{ \"status\":false}"
+    echo "{ \"error\":\"authentication\"}"
 fi
 }
