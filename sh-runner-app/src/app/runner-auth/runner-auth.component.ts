@@ -14,20 +14,24 @@ export class RunnerAuthComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, public setupService: SetupService) {
     this.form = this.formBuilder.group({
-      host: [self.location.host, Validators.required],
-      port: ['3001', Validators.required],
-      username: ['admin', Validators.required],
-      password: ['', Validators.required],
+      connection: this.formBuilder.group({
+        host: [self.location.host, Validators.required],
+        port: ['3001', Validators.required],
+      }),
+      signin:this.formBuilder.group({
+        username: ['admin', Validators.required],
+        password: ['', Validators.required],
+      }),
     });
   }
 
   authenticate(){
     let server_auth = this.setupService.post(
-      'http://'+ this.form.controls["host"].value +':'+ this.form.controls["port"].value +
+      'http://'+ this.form.controls["connection"].value.host +':'+ this.form.controls["connection"].value.port +
       '/_request/server_signin',
       { 
-        "username":this.form.controls["username"].value, 
-        "password":this.form.controls["password"].value 
+        "username":this.form.controls["signin"].value.username, 
+        "password":this.form.controls["signin"].value.password 
       });
     
     server_auth.subscribe(

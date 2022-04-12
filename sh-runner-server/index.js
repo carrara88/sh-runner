@@ -28,14 +28,10 @@ app.options('*', cors())
 * availables requests:  ["server_restart", "server_status", "server_signin"]
 */
 app.post('/_request/:request', (req, res) => {
-    //var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-    var regularExpression = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-
-    if(regularExpression.test(req.body.password)) {
-        res.send('{PASS OK!}');
-    }else{
-        res.send('{PASS KO!}');
-    }
+    //var sanitizing = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/; //sanitizing strong regex (force secure combo 8-64 digits of letters+numbers+simbols)
+    var sanitizing_user = /^[a-zA-Z0-9!@#$%^&_-*]{3,64}$/; //sanitizing regex (force secure combo 3-64 digits)
+    var sanitizing_password = /^[a-zA-Z0-9!@#$%^&_-*]{3,64}$/; //sanitizing regex (force secure combo 3-64 digits)
+    if(sanitizing_user.test(req.body.username) && sanitizing_password.test(req.body.password)) //accept only sanitized credentials
     if( ["server_restart", "server_status", "server_signin"].includes(req.params.request) ){
         
         execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req='+req.params.request,'-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
@@ -58,7 +54,7 @@ app.post('/_request/:request', (req, res) => {
 * INFO (_GET)
 * PUBLIC API
 * Un-Authenticated GET requests
-* availables requests:  [server_info]
+* availables requests:  ["server_info"]
 */
 app.get('/request/:request', (req, res) => {
     if( ["server_info"].includes(req.params.request) ){
