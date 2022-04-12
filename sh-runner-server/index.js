@@ -6,6 +6,7 @@ var cors = require('cors');
 var app = express();
 
 
+
 var corsOptions = {
         "origin": "*",
         "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -13,6 +14,8 @@ var corsOptions = {
         "optionsSuccessStatus": 200
 }
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 app.options('*', cors())
 
