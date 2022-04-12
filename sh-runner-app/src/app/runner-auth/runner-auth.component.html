@@ -8,10 +8,32 @@
                 <clr-control-helper>host</clr-control-helper>
                 <clr-control-error *clrIfError="'required'">[Host] Required</clr-control-error>
             </clr-input-container>
+
+            <clr-input-container>
+                <label>Port</label>
+                <input clrInput formControlName="port" />
+                <clr-control-helper>port</clr-control-helper>
+                <clr-control-error *clrIfError="'required'">[Port] Required</clr-control-error>
+            </clr-input-container>
+
+            <clr-input-container>
+                <label>Username</label>
+                <input clrInput formControlName="username" />
+                <clr-control-helper>username</clr-control-helper>
+                <clr-control-error *clrIfError="'required'">[Username] Required</clr-control-error>
+            </clr-input-container>
+
+            <clr-input-container>
+                <label>Password</label>
+                <input clrInput formControlName="password" />
+                <clr-control-helper>password</clr-control-helper>
+                <clr-control-error *clrIfError="'required'">[Password] Required</clr-control-error>
+            </clr-input-container>
         </form>
       <p>Ah ah ah! You didn't say the magic word! Please Sign In!</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="openSignIn = false">Sign In</button>
+        <button type="button" class="btn btn-primary" (click)="openSignIn = false; authenticate();">close</button>
+        <button type="button" class="btn btn-primary" (click)="authenticate();">Sign In</button>
     </div>
   </clr-modal>
