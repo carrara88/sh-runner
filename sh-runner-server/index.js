@@ -21,90 +21,57 @@ app.options('*', cors())
 
 
 
-/*
+/**
 * REQUEST (_POST)
+* PRIVATE API
+* Authenticated POST requests
+* availables requests:  ["server_restart", "server_status", "server_signin"]
 */
 app.post('/_request/:request', (req, res) => {
-    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req='+req.params.request,'-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
-        console.log(stdout);
-        console.log(stderr);
-        if (error !== null) {
-            res.sendFile('error.json', {root: __dirname});
-            console.log(`exec error: ${error}`);
-        }else{
-            res.send(`${stdout}`);
-        }
-    });
+    if(req.params.request in ["server_restart", "server_status", "server_signin"]){
+        execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req='+req.params.request,'-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
+            console.log(stdout);
+            console.log(stderr);
+            if (error !== null) {
+                res.sendFile('error.json', {root: __dirname});
+                console.log(`exec error: ${error}`);
+            }else{
+                res.send(`${stdout}`);
+            }
+        });
+    }else{
+        console.log(`exec error: ${error}`);
+        res.send(`{"error":"request not found"}`);
+    }
 });
 
-
-
-
-/*
-* RESTART (_POST)
-*/
-app.get('/server_restart', (req, res) => {
-    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_restart','-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
-        console.log(stdout);
-        console.log(stderr);
-        if (error !== null) {
-            res.sendFile('error.json', {root: __dirname});
-            console.log(`exec error: ${error}`);
-        }else{
-            res.send(`${stdout}`);
-        }
-    });
-});
-
-/*
+/**
 * INFO (_GET)
+* PUBLIC API
+* Un-Authenticated GET requests
+* availables requests:  [server_info]
 */
-app.get('/server_info', (req, res) => {
-    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_info'], (error, stdout, stderr) => {
-        console.log(stdout);
-        console.log(stderr);
-        if (error !== null) {
-            res.sendFile('error.json', {root: __dirname});
-            console.log(`exec error: ${error}`);
-        }else{
-            res.send(`${stdout}`);
-        }
-    });
+app.get('/:request', (req, res) => {
+    if(req.params.request in ["server_info"]){
+        execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req='+req.params.request], (error, stdout, stderr) => {
+            console.log(stdout);
+            console.log(stderr);
+            if (error !== null) {
+                res.sendFile('error.json', {root: __dirname});
+                console.log(`exec error: ${error}`);
+            }else{
+                res.send(`${stdout}`);
+            }
+        });
+    }else{
+        console.log(`exec error: ${error}`);
+        res.send(`{"error":"request not found"}`);
+    }
 });
 
-/*
-* STATUS (_POST)
+/**
+* Server listening on designed port
 */
-app.post('/server_status', (req, res) => {
-    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_status','-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
-        console.log(stdout);
-        console.log(stderr);
-        if (error !== null) {
-            res.sendFile('error.json', {root: __dirname});
-            console.log(`exec error: ${error}`);
-        }else{
-            res.send(`${stdout}`);
-        }
-    });
-});
-
-/*
-* AUTH (_POST)
-*/
-app.post('/server_signin', (req, res) => {
-    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_signin','-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
-        console.log(stdout);
-        console.log(stderr);
-        if (error !== null) {
-            res.sendFile('error.json', {root: __dirname});
-            console.log(`exec error: ${error}`);
-        }else{
-            res.send(`${stdout}`);
-        }
-    });
-});
-
-
-app.listen(port, () => {            //server starts listening for any attempts from a client to connect at port: {port}
-    console.log(`Welcome to your server! Listening on port ${port}`); 
+app.listen(port, () => {
+    console.log(`Welcome to sh-runner-server, listening on port ${port}`); 
 });
