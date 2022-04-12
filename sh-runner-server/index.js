@@ -75,7 +75,7 @@ app.get('/server_info', (req, res) => {
 /*
 * STATUS (_POST)
 */
-app.get('/server_status', (req, res) => {
+app.post('/server_status', (req, res) => {
     execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_status','-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
@@ -91,7 +91,7 @@ app.get('/server_status', (req, res) => {
 /*
 * AUTH (_POST)
 */
-app.get('/server_signin', (req, res) => {
+app.post('/server_signin', (req, res) => {
     execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_signin','-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
