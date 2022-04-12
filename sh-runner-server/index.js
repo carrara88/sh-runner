@@ -19,11 +19,32 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 app.options('*', cors())
 
+
+
+/*
+* RESTART (_POST)
+*/
+app.get('/_request/:request', (req, res) => {
+    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req='+req.params.request,'-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
+        console.log(stdout);
+        console.log(stderr);
+        if (error !== null) {
+            res.sendFile('error.json', {root: __dirname});
+            console.log(`exec error: ${error}`);
+        }else{
+            res.send(`${stdout}`);
+        }
+    });
+});
+
+
+
+
 /*
 * RESTART (_POST)
 */
 app.get('/server_restart', (req, res) => {
-    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_restart','-u='+req.params.username,'-p='+req.params.password], (error, stdout, stderr) => {
+    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_restart','-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
@@ -55,7 +76,7 @@ app.get('/server_info', (req, res) => {
 * STATUS (_POST)
 */
 app.get('/server_status', (req, res) => {
-    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_status','-u='+req.params.username,'-p='+req.params.password], (error, stdout, stderr) => {
+    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_status','-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
