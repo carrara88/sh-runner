@@ -28,7 +28,7 @@ app.options('*', cors())
 * availables requests:  ["server_restart", "server_status", "server_signin"]
 */
 app.post('/_request/:request', (req, res) => {
-    if(req.params.request in ["server_restart", "server_status", "server_signin"]){
+    if( ["server_restart", "server_status", "server_signin"].includes(req.params.request) ){
         execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req='+req.params.request,'-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
             console.log(stdout);
             console.log(stderr);
@@ -52,7 +52,7 @@ app.post('/_request/:request', (req, res) => {
 * availables requests:  [server_info]
 */
 app.get('/request/:request', (req, res) => {
-    if(req.params.request in ["server_info"]){
+    if( ["server_info"].includes(req.params.request) ){
         execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req='+req.params.request], (error, stdout, stderr) => {
             console.log(stdout);
             console.log(stderr);
