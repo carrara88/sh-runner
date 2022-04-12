@@ -10,7 +10,7 @@
 
 echo "################################################################"
 echo "-> buildsetup for sh-runner (extra-setup: npm + @angular/cli)"
-
+cd /var/www/sh-runner/sh-runner-app
 echo "################################################################"
 echo "-> setup: npm"
 sudo apt-get install npm -y

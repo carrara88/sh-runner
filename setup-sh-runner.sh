@@ -78,12 +78,15 @@ else
     sudo git clone https://github.com/carrara88/sh-runner.git /var/www/sh-runner
 fi
 sudo chmod 755 /var/www/sh-runner/sh-runner-server/server.sh
-sudo npm install /var/www/sh-runner/sh-runner-server
+cd /var/www/sh-runner/sh-runner-server
+sudo npm install
+sudo systemctl restart node_sh_runner
 
 echo "################################################################"
 echo "-> move:  /var/www/sh-runner/sh-runner-app/dist/. -> /var/www/html/runner/ "
 sudo rm -rf /var/www/html/runner
 sudo mkdir /var/www/html/runner
 sudo cp -a /var/www/sh-runner/sh-runner-app/dist/. /var/www/html/runner/
+
 echo "################################################################"
 echo "-> Setup completed!"
