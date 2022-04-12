@@ -40,7 +40,7 @@ app.post('/_request/:request', (req, res) => {
             }
         });
     }else{
-        console.log(`exec error: ${error}`);
+        console.log(`request not found: ${req.params.request}`);
         res.send(`{"error":"request not found"}`);
     }
 });
@@ -64,7 +64,7 @@ app.get('/:request', (req, res) => {
             }
         });
     }else{
-        console.log(`exec error: ${error}`);
+        console.log(`request not found: ${req.params.request}`);
         res.send(`{"error":"request not found"}`);
     }
 });
