@@ -28,7 +28,9 @@ app.options('*', cors())
 * availables requests:  ["server_restart", "server_status", "server_signin"]
 */
 app.post('/_request/:request', (req, res) => {
-    var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    //var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    var regularExpression = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+
     if(regularExpression.test(req.body.password)) {
         res.send('{PASS OK!}');
     }else{
