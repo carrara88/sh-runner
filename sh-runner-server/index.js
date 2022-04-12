@@ -71,7 +71,7 @@ app.get('/server_status', (req, res) => {
 * AUTH (_POST)
 */
 app.get('/server_signin', (req, res) => {
-    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_signin','-u='+req.params.username,'-p='+req.params.password], (error, stdout, stderr) => {
+    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_signin','-u='+req.body.username,'-p='+req.body.password], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
