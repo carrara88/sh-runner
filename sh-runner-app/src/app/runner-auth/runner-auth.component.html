@@ -22,8 +22,8 @@
                         <clr-control-helper>port</clr-control-helper>
                         <clr-control-error *clrIfError="'required'">[Port] Required</clr-control-error>
                     </clr-input-container>
-                    <button (click)="check_connection()">Check Connection</button>
-                    <button *ngIf="connected" clrStepButton="next">Sign In</button>
+                    <button class="btn btn-sm" (click)="check_connection()">Check Connection<clr-icon [attr.shape]="authenticated?'check':'times'"></clr-icon></button>
+                    <button class="btn btn-sm" *ngIf="connected" clrStepButton="next">Sign In</button>
                 </clr-step-content>
             </clr-stepper-panel>
 
@@ -47,7 +47,8 @@
                         <clr-control-error *clrIfError="'required'">[Password] Required</clr-control-error>
                     </clr-input-container>
                 </clr-step-content>
-                <button *ngIf="authenticated" clrStepButton="next">Sign In</button>
+                <button class="btn btn-sm" (click)="authenticate()">Sign In <clr-icon [attr.shape]="authenticated?'check':'times'"></clr-icon></button>
+                <button class="btn btn-sm" *ngIf="authenticated" clrStepButton="next">Sign In</button>
             </clr-stepper-panel>
 
             
