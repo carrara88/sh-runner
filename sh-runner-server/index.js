@@ -30,9 +30,9 @@ app.options('*', cors())
 app.post('/_request/:request', (req, res) => {
     var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     if(regularExpression.test(req.body.password)) {
-        res.send(`PASS OK!`);
+        res.send('{PASS OK!}');
     }else{
-        res.send(`PASS KO.`);
+        res.send('{PASS KO!}');
     }
     if( ["server_restart", "server_status", "server_signin"].includes(req.params.request) ){
         
