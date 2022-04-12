@@ -1,1 +1,10 @@
-<p>runner-auth works!</p>
+<clr-modal [(clrModalOpen)]="openSignIn">
+    <h3 class="modal-title">Sign In</h3>
+    <div class="modal-body">
+      <p>Ah ah ah! You didn't say the magic word! Please Sign In!</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="openModal = false">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="openModal = false">Ok</button>
+    </div>
+  </clr-modal>
