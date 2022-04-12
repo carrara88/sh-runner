@@ -40,8 +40,8 @@ app.post('/_request/:request', (req, res) => {
             }
         });
     }else{
-        console.log(`request not found: ${req.params.request}`);
-        res.send(`{"error":"request not found"}`);
+        console.log(`post request not found: ${req.params.request}`);
+        res.send(`{"error":"post request not found"}`);
     }
 });
 
@@ -51,7 +51,7 @@ app.post('/_request/:request', (req, res) => {
 * Un-Authenticated GET requests
 * availables requests:  [server_info]
 */
-app.get('/:request', (req, res) => {
+app.get('/request/:request', (req, res) => {
     if(req.params.request in ["server_info"]){
         execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req='+req.params.request], (error, stdout, stderr) => {
             console.log(stdout);
@@ -64,8 +64,8 @@ app.get('/:request', (req, res) => {
             }
         });
     }else{
-        console.log(`request not found: ${req.params.request}`);
-        res.send(`{"error":"request not found"}`);
+        console.log(`get request not found: ${req.params.request}`);
+        res.send(`{"error":"get request not found"}`);
     }
 });
 
