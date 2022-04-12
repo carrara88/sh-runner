@@ -8,10 +8,10 @@ var app = express();
 
 
 var corsOptions = {
-        "origin": "*",
-        "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-        "preflightContinue": true,
-        "optionsSuccessStatus": 200
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": true,
+    "optionsSuccessStatus": 200
 }
 
 app.use(express.json());
