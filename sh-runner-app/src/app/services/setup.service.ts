@@ -9,7 +9,15 @@ export class SetupService {
 
   constructor(private http: HttpClient) {   }
 
-  public get (endpoint:string) {  
+  public post (endpoint:string,data:any) {  
+    return this.http.post <any> (endpoint,data, { 
+        headers: new HttpHeaders({ 'Content-Type': 'application/json'  }),
+        observe: 'response',
+        responseType: "json",
+        //withCredentials: true
+    });
+}
+public get (endpoint:string) {  
       return this.http.get <any> (endpoint, { 
           headers: new HttpHeaders({ 'Content-Type': 'application/json'  }),
           observe: 'response',

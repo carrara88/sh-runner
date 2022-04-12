@@ -22,7 +22,7 @@ export class RunnerAuthComponent implements OnInit {
   }
 
   authenticate(){
-    let server_auth = this.setupService.get('http://'+ self.location.host +':3001/server_signin/'+this.form.controls["username"].value+"/"+this.form.controls["password"].value);
+    let server_auth = this.setupService.post('http://'+ self.location.host +':3001/server_signin',{ "username":this.form.controls["username"].value, "password":this.form.controls["password"].value });
     server_auth.subscribe(
       (data:any)=>{
         console.log('get authenticate:', data);

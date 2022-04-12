@@ -17,9 +17,9 @@ app.use(cors(corsOptions));
 app.options('*', cors())
 
 /*
-* RESTART
+* RESTART (_POST)
 */
-app.get('/server_restart/:username/:password', (req, res) => {
+app.get('/server_restart', (req, res) => {
     execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_restart','-u='+req.params.username,'-p='+req.params.password], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
@@ -49,9 +49,9 @@ app.get('/server_info', (req, res) => {
 });
 
 /*
-* STATUS
+* STATUS (_POST)
 */
-app.get('/server_status/:username/:password', (req, res) => {
+app.get('/server_status', (req, res) => {
     execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_status','-u='+req.params.username,'-p='+req.params.password], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
@@ -65,9 +65,9 @@ app.get('/server_status/:username/:password', (req, res) => {
 });
 
 /*
-* AUTH
+* AUTH (_POST)
 */
-app.get('/server_signin/:username/:password', (req, res) => {
+app.get('/server_signin', (req, res) => {
     execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_signin','-u='+req.params.username,'-p='+req.params.password], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
