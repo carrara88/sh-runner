@@ -51,8 +51,8 @@ app.get('/server_info', (req, res) => {
 /*
 * STATUS
 */
-app.get('/server_status', (req, res) => {
-    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_status'], (error, stdout, stderr) => {
+app.get('/server_status/:username/:password', (req, res) => {
+    execFile('/var/www/sh-runner/sh-runner-server/server.sh', ['-req=server_status','-u='+req.params.username,'-p='+req.params.password], (error, stdout, stderr) => {
         console.log(stdout);
         console.log(stderr);
         if (error !== null) {
