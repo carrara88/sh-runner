@@ -23,7 +23,7 @@
                         <clr-control-error *clrIfError="'required'">[Port] Required</clr-control-error>
                     </clr-input-container>
                     <button class="btn btn-sm" (click)="check_connection()">Verify Connection</button> <clr-icon [attr.shape]="connected?'check':'times'"></clr-icon> {{connected?'Connection Verified':''}}
-                    <button class="btn btn-sm btn-success" *ngIf="connected" clrStepButton="next">Connect now</button>
+                    <button class="btn btn-sm btn-block btn-success" *ngIf="connected" clrStepButton="next">Next</button>
                 </clr-step-content>
             </clr-stepper-panel>
 
@@ -47,8 +47,8 @@
                         <clr-control-error *clrIfError="'required'">[Password] Required</clr-control-error>
                     </clr-input-container>
                 </clr-step-content>
-                <button class="btn btn-sm" (click)="authenticate()">Verify user</button> <clr-icon [attr.shape]="authenticated?'check':'times'"></clr-icon> {{connected?'Verified':''}}
-                <button class="btn btn-sm  btn-success" *ngIf="authenticated" clrStepButton="next">Sign In</button>
+                <button class="btn btn-sm" (click)="authenticate()">Verify user</button> <clr-icon [attr.shape]="authenticated?'check':'times'"></clr-icon> {{authenticated?'Verified':''}}
+                <button class="btn btn-sm btn-block btn-success" *ngIf="authenticated" clrStepButton="next">Sign In</button>
             </clr-stepper-panel>
 
             
