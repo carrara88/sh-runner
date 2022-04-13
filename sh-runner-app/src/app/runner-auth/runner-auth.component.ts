@@ -73,6 +73,11 @@ export class RunnerAuthComponent implements OnInit {
           this.response="Ah ah ah! You didn't say the magic word! #"+data.body.error;
           this.authenticated=false;
         }
+      },
+      (error) => { 
+        this.loading=false;
+        this.response="Not Found.";
+        this.authenticated=false;
       }
     );
   }
@@ -103,6 +108,11 @@ export class RunnerAuthComponent implements OnInit {
           this.response="Connection refused. "+data.body.error;
         }
         this.loading=false;
+      },
+      (error) => { 
+        this.loading=false;
+        this.response="Not Found.";
+        this.connected=false;
       }
     );
   }
