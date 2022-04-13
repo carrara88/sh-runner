@@ -1,1 +1,61 @@
-<p>runner-auth works!</p>
+<clr-modal [(clrModalOpen)]="openSignIn" [clrModalClosable]="closableSignIn">
+    <h3 class="modal-title">Sign In</h3>
+    <div class="modal-body">
+        <form clrStepper [formGroup]="form" class="clr-form clr-form-horizontal">
+
+            <clr-stepper-panel formGroupName="connection">
+                <clr-step-title>Connection</clr-step-title>
+                <clr-step-description>
+                    <clr-icon shape="disconnect"></clr-icon>
+                </clr-step-description>
+                <clr-step-content *clrIfExpanded>
+                    <clr-input-container>
+                        <label>Host</label>
+                        <input clrInput formControlName="host" />
+                        <clr-control-helper>host</clr-control-helper>
+                        <clr-control-error *clrIfError="'required'">[Host] Required</clr-control-error>
+                    </clr-input-container>
+        
+                    <clr-input-container>
+                        <label>Port</label>
+                        <input clrInput formControlName="port" />
+                        <clr-control-helper>port</clr-control-helper>
+                        <clr-control-error *clrIfError="'required'">[Port] Required</clr-control-error>
+                    </clr-input-container>
+                    <button class="btn btn-sm" (click)="check_connection()">Verify Connection</button> <clr-icon [attr.shape]="connected?'check':'times'"></clr-icon> {{connected?'Connection Verified':''}}
+                    <button class="btn btn-sm btn-block btn-success" *ngIf="connected" clrStepButton="next">Next</button>
+                </clr-step-content>
+            </clr-stepper-panel>
+
+            <clr-stepper-panel *ngIf="connected" formGroupName="signin">
+                <clr-step-title>Authentication</clr-step-title>
+                <clr-step-description>
+                    <clr-icon shape="id-badge"></clr-icon>
+                </clr-step-description>
+                <clr-step-content *clrIfExpanded>
+                    <clr-input-container>
+                        <label>Username</label>
+                        <input clrInput formControlName="username" />
+                        <clr-control-helper>username</clr-control-helper>
+                        <clr-control-error *clrIfError="'required'">[Username] Required</clr-control-error>
+                    </clr-input-container>
+        
+                    <clr-input-container>
+                        <label>Password</label>
+                        <input clrInput formControlName="password" />
+                        <clr-control-helper>password</clr-control-helper>
+                        <clr-control-error *clrIfError="'required'">[Password] Required</clr-control-error>
+                    </clr-input-container>
+                </clr-step-content>
+                <button class="btn btn-sm" (click)="authenticate()">Verify user</button> <clr-icon [attr.shape]="authenticated?'check':'times'"></clr-icon> {{authenticated?'Verified':''}}
+                <button class="btn btn-sm btn-block btn-success" *ngIf="authenticated" (click)="openSignIn=false;" clrStepButton="next">Sign In</button>
+            </clr-stepper-panel>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div *ngIf="loading" class="progress loop">
+            <progress></progress>
+        </div>
+        <div>{{response}}</div>
+    </div>
+  </clr-modal>

@@ -2,14 +2,15 @@
 
 ################################################################
 # Server buildsetup for 'sh-runner'
-# run this script with:
-# $ curl https://raw.githubusercontent.com/carrara88/sh-runner/main/sh-runner-server/buildsetup-runner.sh -o buildsetup-sh-runner.sh
-# $ ./buildsetup-sh-runner.sh
+# load this script with:
+# 
+# curl https://raw.githubusercontent.com/carrara88/sh-runner/main/sh-runner-server/buildsetup-runner.sh -o buildsetup-sh-runner.sh
+# ./buildsetup-sh-runner.sh
 ################################################################
 
 echo "################################################################"
 echo "-> buildsetup for sh-runner (extra-setup: npm + @angular/cli)"
-
+cd /var/www/sh-runner/sh-runner-app
 echo "################################################################"
 echo "-> setup: npm"
 sudo apt-get install npm -y
