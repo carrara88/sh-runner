@@ -1,4 +1,4 @@
-<clr-modal [(clrModalOpen)]="openSignIn">
+<clr-modal [(clrModalOpen)]="openSignIn" [clrModalClosable]="closableSignIn">
     <h3 class="modal-title">Sign In</h3>
     <div class="modal-body">
         <form clrStepper [formGroup]="form" class="clr-form clr-form-horizontal">
@@ -48,7 +48,7 @@
                     </clr-input-container>
                 </clr-step-content>
                 <button class="btn btn-sm" (click)="authenticate()">Verify user</button> <clr-icon [attr.shape]="authenticated?'check':'times'"></clr-icon> {{authenticated?'Verified':''}}
-                <button class="btn btn-sm btn-block btn-success" *ngIf="authenticated" clrStepButton="next">Sign In</button>
+                <button class="btn btn-sm btn-block btn-success" *ngIf="authenticated" (click)="openSignIn=false;" clrStepButton="next">Sign In</button>
             </clr-stepper-panel>
         </form>
     </div>

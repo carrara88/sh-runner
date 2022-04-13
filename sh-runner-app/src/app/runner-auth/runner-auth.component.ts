@@ -9,6 +9,7 @@ import { SetupService } from '../services/setup.service';
 })
 export class RunnerAuthComponent implements OnInit {
 
+  closableSignIn=false;
   openSignIn=true;
   form: FormGroup;
   server_info:any={
@@ -62,16 +63,19 @@ export class RunnerAuthComponent implements OnInit {
         console.log('get authenticate:', data);
         if(data.body.authentication==true){
           this.authenticated=true;
+          this.closableSignIn=true;
           this.credentials.username=this.form.controls["signin"].value.username;
           this.credentials.password=this.form.controls["signin"].value.password;
           this.response="Great! Ready to start!";
         }else{
           this.authenticated=false;
+          this.closableSignIn=false;
           this.response="Ah ah ah! You didn't say the magic word!";
         }
         if(data.body.error!=undefined){
-          this.response="Ah ah ah! You didn't say the magic word! #"+data.body.error;
           this.authenticated=false;
+          this.closableSignIn=false;
+          this.response="Ah ah ah! You didn't say the magic word! #"+data.body.error;
         }
       },
       (error) => { 
@@ -111,8 +115,8 @@ export class RunnerAuthComponent implements OnInit {
       },
       (error) => { 
         this.loading=false;
-        this.response="Not Found.";
         this.connected=false;
+        this.response="Not Found.";
       }
     );
   }
